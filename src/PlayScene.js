@@ -18,8 +18,8 @@ class PlayScene extends Phaser.Scene {
     this.reachSound = this.sound.add('reach', {volume: 0.2});
 
     this.startTrigger = this.physics.add.sprite(0, 10).setOrigin(0, 1).setImmovable();
-    this.ground = this.add.tileSprite(0, height, 88, 26, 'ground').setOrigin(0, 1)
-    this.dino = this.physics.add.sprite(0, height, 'dino-idle')
+    this.ground = this.add.tileSprite(0, height, 88, 26, 'ground').setOrigin(0, 0.5)
+    this.mario = this.physics.add.sprite(0, height, 'mario-idle')
       .setCollideWorldBounds(true)
       .setGravityY(5000)
       .setBodySize(44, 92)
@@ -59,7 +59,7 @@ class PlayScene extends Phaser.Scene {
   }
 
   initColliders() {
-    this.physics.add.collider(this.dino, this.obsticles, () => {
+    this.physics.add.collider(this.mario, this.obsticles, () => {
       this.highScoreText.x = this.scoreText.x - this.scoreText.width - 20;
 
       const highScore = this.highScoreText.text.substr(this.highScoreText.text.length - 5);
@@ -71,7 +71,7 @@ class PlayScene extends Phaser.Scene {
       this.physics.pause();
       this.isGameRunning = false;
       this.anims.pauseAll();
-      this.dino.setTexture('dino-hurt');
+      this.mario.setTexture('mario-hurt');
       this.respawnTime = 0;
       this.gameSpeed = 10;
       this.gameOverScreen.setAlpha(1);
@@ -82,7 +82,7 @@ class PlayScene extends Phaser.Scene {
 
   initStartTrigger() {
     const { width, height } = this.game.config;
-    this.physics.add.overlap(this.startTrigger, this.dino, () => {
+    this.physics.add.overlap(this.startTrigger, this.mario, () => {
       if (this.startTrigger.y === 10) {
         this.startTrigger.body.reset(0, height);
         return;
@@ -95,8 +95,8 @@ class PlayScene extends Phaser.Scene {
         loop: true,
         callbackScope: this,
         callback: () => {
-          this.dino.setVelocityX(80);
-          this.dino.play('dino-run', 1);
+          this.mario.setVelocityX(80);
+          this.mario.play('mario-run', 1);
 
           if (this.ground.width < width) {
             this.ground.width += 17 * 2;
@@ -105,7 +105,7 @@ class PlayScene extends Phaser.Scene {
           if (this.ground.width >= 1000) {
             this.ground.width = width;
             this.isGameRunning = true;
-            this.dino.setVelocityX(0);
+            this.mario.setVelocityX(0);
             this.scoreText.setAlpha(1);
             this.environment.setAlpha(1);
             startEvent.remove();
@@ -117,22 +117,22 @@ class PlayScene extends Phaser.Scene {
 
   initAnims() {
     this.anims.create({
-      key: 'dino-run',
-      frames: this.anims.generateFrameNumbers('dino', {start: 2, end: 3}),
+      key: 'mario-run',
+      frames: this.anims.generateFrameNumbers('mario', {start: 2, end: 3}),
       frameRate: 10,
       repeat: -1
     })
 
     this.anims.create({
-      key: 'dino-down-anim',
-      frames: this.anims.generateFrameNumbers('dino-down', {start: 0, end: 1}),
+      key: 'mario-down-anim',
+      frames: this.anims.generateFrameNumbers('mario-down', {start: 0, end: 1}),
       frameRate: 10,
       repeat: -1
     })
 
     this.anims.create({
-      key: 'enemy-dino-fly',
-      frames: this.anims.generateFrameNumbers('enemy-bird', {start: 0, end: 1}),
+      key: 'enemy-mario-fly',
+      frames: this.anims.generateFrameNumbers('enemy-bill', {start: 0, end: 1}),
       frameRate: 6,
       repeat: -1
     })
@@ -173,9 +173,9 @@ class PlayScene extends Phaser.Scene {
 
   handleInputs() {
     this.restart.on('pointerdown', () => {
-      this.dino.setVelocityY(0);
-      this.dino.body.height = 92;
-      this.dino.body.offset.y = 0;
+      this.mario.setVelocityY(0);
+      this.mario.body.height = 92;
+      this.mario.body.offset.y = 0;
       this.physics.resume();
       this.obsticles.clear(true, true);
       this.isGameRunning = true;
@@ -184,27 +184,27 @@ class PlayScene extends Phaser.Scene {
     })
 
     this.input.keyboard.on('keydown_SPACE', () => {
-      if (!this.dino.body.onFloor() || this.dino.body.velocity.x > 0) { return; }
+      if (!this.mario.body.onFloor() || this.mario.body.velocity.x > 0) { return; }
 
       this.jumpSound.play();
-      this.dino.body.height = 92;
-      this.dino.body.offset.y = 0;
-      this.dino.setVelocityY(-1600);
-      this.dino.setTexture('dino', 0);
+      this.mario.body.height = 92;
+      this.mario.body.offset.y = 0;
+      this.mario.setVelocityY(-1600);
+      this.mario.setTexture('mario-jump', 0);
     })
 
     this.input.keyboard.on('keydown_DOWN', () => {
-      if (!this.dino.body.onFloor() || !this.isGameRunning) { return; }
+      if (!this.mario.body.onFloor() || !this.isGameRunning) { return; }
 
-      this.dino.body.height = 58;
-      this.dino.body.offset.y = 34;
+      this.mario.body.height = 58;
+      this.mario.body.offset.y = 34;
     })
 
     this.input.keyboard.on('keyup_DOWN', () => {
       if ((this.score !== 0 && !this.isGameRunning)) { return; }
 
-      this.dino.body.height = 92;
-      this.dino.body.offset.y = 0;
+      this.mario.body.height = 92;
+      this.mario.body.offset.y = 0;
     })
   }
 
@@ -215,9 +215,9 @@ class PlayScene extends Phaser.Scene {
     let obsticle;
     if (obsticleNum > 6) {
       const enemyHeight = [20, 50];
-      obsticle = this.obsticles.create(this.game.config.width + distance, this.game.config.height - enemyHeight[Math.floor(Math.random() * 2)], `enemy-bird`)
+      obsticle = this.obsticles.create(this.game.config.width + distance, this.game.config.height - enemyHeight[Math.floor(Math.random() * 2)], `enemy-bill`)
         .setOrigin(0, 1)
-        obsticle.play('enemy-dino-fly', 1);
+        obsticle.play('enemy-mario-fly', 1);
       obsticle.body.height = obsticle.body.height / 1.5;
     } else {
       obsticle = this.obsticles.create(this.game.config.width + distance, this.game.config.height, `obsticle-${obsticleNum}`)
@@ -254,11 +254,11 @@ class PlayScene extends Phaser.Scene {
       }
     })
 
-    if (this.dino.body.deltaAbsY() > 0) {
-      this.dino.anims.stop();
-      this.dino.setTexture('dino', 0);
+    if (this.mario.body.deltaAbsY() > 0) {
+      this.mario.anims.stop();
+      this.mario.setTexture('mario-jump', 0);
     } else {
-      this.dino.body.height <= 58 ? this.dino.play('dino-down-anim', true) : this.dino.play('dino-run', true);
+      this.mario.body.height <= 58 ? this.mario.play('mario-down-anim', true) : this.mario.play('mario-run', true);
     }
   }
 }
