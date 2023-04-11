@@ -4,7 +4,6 @@ class PlayScene extends Phaser.Scene {
   constructor() {
     super("PlayScene");
   }
-
   create() {
     const { height, width } = this.game.config;
     this.gameSpeed = 10;
@@ -68,9 +67,7 @@ class PlayScene extends Phaser.Scene {
     this.gameOverText = this.add.image(0, 0, "game-over");
     this.restart = this.add.image(0, 80, "restart").setInteractive();
     this.gameOverScreen.add([this.gameOverText, this.restart]);
-
     this.obsticles = this.physics.add.group();
-
     this.initAnims();
     this.initStartTrigger();
     this.initColliders();
@@ -162,7 +159,6 @@ class PlayScene extends Phaser.Scene {
       frameRate: 10,
       repeat: -1,
     });
-
     this.anims.create({
       key: "mario-down-anim",
       frames: this.anims.generateFrameNumbers("mario-down", {
@@ -172,7 +168,6 @@ class PlayScene extends Phaser.Scene {
       frameRate: 10,
       repeat: -1,
     });
-
     this.anims.create({
       key: "enemy-mario-fly",
       frames: this.anims.generateFrameNumbers("enemy-bill", {
@@ -183,7 +178,6 @@ class PlayScene extends Phaser.Scene {
       repeat: -1,
     });
   }
-
   handleScore() {
     this.time.addEvent({
       delay: 1000 / 10,
@@ -193,13 +187,10 @@ class PlayScene extends Phaser.Scene {
         if (!this.isGameRunning) {
           return;
         }
-
         this.score++;
         this.gameSpeed += 0.01;
-
         if (this.score % 100 === 0) {
           this.reachSound.play();
-
           this.tweens.add({
             targets: this.scoreText,
             duration: 100,
@@ -208,17 +199,14 @@ class PlayScene extends Phaser.Scene {
             yoyo: true,
           });
         }
-
         const score = Array.from(String(this.score), Number);
         for (let i = 0; i < 5 - String(this.score).length; i++) {
           score.unshift(0);
         }
-
         this.scoreText.setText(score.join(""));
       },
     });
   }
-
   handleInputs() {
     this.restart.on("pointerdown", () => {
       this.mario.setVelocityY(0);
@@ -246,30 +234,24 @@ class PlayScene extends Phaser.Scene {
       this.mario.setVelocityY(-1600);
       this.mario.setTexture("mario-jump", 0);
     });
-
     this.input.keyboard.on("keydown_DOWN", () => {
       if (!this.mario.body.onFloor() || !this.isGameRunning) {
         return;
       }
-
       this.mario.body.height = 58;
       this.mario.body.offset.y = 34;
     });
-
     this.input.keyboard.on("keyup_DOWN", () => {
       if (this.score !== 0 && !this.isGameRunning) {
         return;
       }
-
       this.mario.body.height = 92;
       this.mario.body.offset.y = 0;
     });
   }
-
   placeObsticle() {
     const obsticleNum = Math.floor(Math.random() * 7) + 1;
     const distance = Phaser.Math.Between(600, 900);
-
     let obsticle;
     if (obsticleNum > 6) {
       const enemyHeight = [20, 50];
@@ -293,37 +275,30 @@ class PlayScene extends Phaser.Scene {
 
       obsticle.body.offset.y = +10;
     }
-
     obsticle.setImmovable();
   }
-
   update(time, delta) {
     if (!this.isGameRunning) {
       return;
     }
-
     this.ground.tilePositionX += this.gameSpeed;
     Phaser.Actions.IncX(this.obsticles.getChildren(), -this.gameSpeed);
     Phaser.Actions.IncX(this.environment.getChildren(), -0.5);
-
     this.respawnTime += delta * this.gameSpeed * 0.08;
     if (this.respawnTime >= 1500) {
       this.placeObsticle();
       this.respawnTime = 0;
     }
-
     this.obsticles.getChildren().forEach((obsticle) => {
       if (obsticle.getBounds().right < 0) {
         this.obsticles.killAndHide(obsticle);
       }
     });
-
     this.environment.getChildren().forEach((env) => {
       if (env.getBounds().right < 0) {
         env.x = this.game.config.width + 30;
       }
     });
-
     if (this.mario.body.deltaAbsY() > 0) {
       this.mario.anims.stop();
       this.mario.setTexture("mario-jump", 0);
@@ -334,5 +309,4 @@ class PlayScene extends Phaser.Scene {
     }
   }
 }
-
 export default PlayScene;
