@@ -15,7 +15,7 @@ class PlayScene extends Phaser.Scene {
     const jumpSounds = ["jump", "jump2"];
     const randomJumpSound =
       jumpSounds[Math.floor(Math.random() * jumpSounds.length)];
-    this.jumpSound = this.sound.add(randomJumpSound, { volume: 0.2 });
+    this.jumpSound = this.sound.add("jump", { volume: 0.2 });
 
     this.hitSound = this.sound.add("hit", { volume: 0.2 });
     this.reachSound = this.sound.add("reach", { volume: 0.2 });
