@@ -12,11 +12,6 @@ class PlayScene extends Phaser.Scene {
     this.respawnTime = 0;
     this.score = 0;
 
-    const jumpSounds = ["jump", "jump2"];
-    const randomJumpSound =
-      jumpSounds[Math.floor(Math.random() * jumpSounds.length)];
-    this.jumpSound = this.sound.add(randomJumpSound, { volume: 0.2 });
-
     this.hitSound = this.sound.add("hit", { volume: 0.2 });
     this.reachSound = this.sound.add("reach", { volume: 0.2 });
 
@@ -227,12 +222,17 @@ class PlayScene extends Phaser.Scene {
       this.anims.resumeAll();
     });
 
+    const jumpSounds = ["jump", "jump2"];
+
     this.input.keyboard.on("keydown_SPACE", () => {
       if (!this.mario.body.onFloor() || this.mario.body.velocity.x > 0) {
         return;
       }
 
-      this.jumpSound.play();
+      const randomJumpSound =
+          jumpSounds[Math.floor(Math.random() * jumpSounds.length)];
+      this.sound.play(randomJumpSound, { volume: 0.2 });
+
       this.mario.body.height = 92;
       this.mario.body.offset.y = 0;
       this.mario.setVelocityY(-1600);
