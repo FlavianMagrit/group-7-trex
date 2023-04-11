@@ -84,6 +84,7 @@ class PlayScene extends Phaser.Scene {
     this.gameOverScreen.add([this.gameOverText, this.restart]);
 
     this.obsticles = this.physics.add.group();
+    this.peachs = this.physics.add.group();
 
     this.initAnims();
     this.initStartTrigger();
@@ -97,6 +98,7 @@ class PlayScene extends Phaser.Scene {
     this.physics.add.collider(
       this.mario,
       this.obsticles,
+      this.peachs,
       () => {
         if (!this.canCollide) return;
         this.canCollide = false;
@@ -377,17 +379,17 @@ class PlayScene extends Phaser.Scene {
   placepeach() {
     const distance = Phaser.Math.Between(600, 900);
     let peach;
-    peach = this.peach
+    peach = this.peachs
       .create(
         this.game.config.width + distance,
         this.game.config.height,
-        `peach-${peachNum}`
+        `peach`
       )
       .setOrigin(0, 1);
 
     peach.body.offset.y = +10;
 
-    peach.setImmovable();
+    peachs.setImmovable();
   }
 
   update(time, delta) {
