@@ -9,7 +9,7 @@ class LoginForm extends Phaser.Scene {
         this.add.image(400, 300, 'pic');
 
         const text = this.add.text(10, 10, 'Please login to play', {
-            color: 'white',
+            color: 'black',
             fontFamily: 'Arial',
             fontSize: '32px '
         });
