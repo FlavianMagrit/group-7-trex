@@ -48,6 +48,8 @@ class PreloadScene extends Phaser.Scene {
     this.load.image('obsticle-4', 'assets/cactuses_big_1.png')
     this.load.image('obsticle-5', 'assets/cactuses_big_2.png')
     this.load.image('obsticle-6', 'assets/cactuses_big_3.png')
+
+    this.load.image('bonus', 'assets/bonus_life.png');
   }
 
   create() {

@@ -4,6 +4,7 @@ class PlayScene extends Phaser.Scene {
 
   constructor() {
     super('PlayScene');
+    this.lives = 1;
   }
 
   create() {
@@ -12,6 +13,13 @@ class PlayScene extends Phaser.Scene {
     this.isGameRunning = false;
     this.respawnTime = 0;
     this.score = 0;
+    this.bonusRespawnTime = 0;
+    
+    this.livesText = this.add.text(0, 0, `Lives: ${this.lives}`, {fill: "#535353", font: '900 35px Courier', resolution: 5})
+    .setOrigin(0, 0)
+    .setAlpha(1);
+
+    this.bonuses = this.physics.add.group();
 
     this.jumpSound = this.sound.add('jump', {volume: 0.2});
     this.hitSound = this.sound.add('hit', {volume: 0.2});
@@ -59,24 +67,49 @@ class PlayScene extends Phaser.Scene {
   }
 
   initColliders() {
+    this.canCollide = true;
+    
     this.physics.add.collider(this.dino, this.obsticles, () => {
-      this.highScoreText.x = this.scoreText.x - this.scoreText.width - 20;
+      if (!this.canCollide) return;
+      this.canCollide = false;
+      this.lives--;
+  
+      if (this.lives > 0) {
+        this.livesText.setText(`Lives: ${this.lives}`);
+        this.hitSound.play();
+        this.dino.setTint(0xff0000);
+        this.time.delayedCall(1000, () => {
+          this.dino.clearTint();
+          this.canCollide = true;
+        }, [], this);
+      } else {
+        this.lives = 0;
+        this.livesText.setText(`Lives: ${this.lives}`);
+        this.highScoreText.x = this.scoreText.x - this.scoreText.width - 20;
+  
+        const highScore = this.highScoreText.text.substr(this.highScoreText.text.length - 5);
+        const newScore = Number(this.scoreText.text) > Number(highScore) ? this.scoreText.text : highScore;
+  
+        this.highScoreText.setText('HI ' + newScore);
+        this.highScoreText.setAlpha(1);
+        
+        this.physics.pause();
+        this.isGameRunning = false;
+        this.anims.pauseAll();
+        this.dino.setTexture('dino-hurt');
+        this.respawnTime = 0;
+        this.gameSpeed = 10;
+        this.gameOverScreen.setAlpha(1);
+        this.score = 0;
+        this.hitSound.play();
+      }
+    }, null, this);
 
-      const highScore = this.highScoreText.text.substr(this.highScoreText.text.length - 5);
-      const newScore = Number(this.scoreText.text) > Number(highScore) ? this.scoreText.text : highScore;
-
-      this.highScoreText.setText('HI ' + newScore);
-      this.highScoreText.setAlpha(1);
-
-      this.physics.pause();
-      this.isGameRunning = false;
-      this.anims.pauseAll();
-      this.dino.setTexture('dino-hurt');
-      this.respawnTime = 0;
-      this.gameSpeed = 10;
-      this.gameOverScreen.setAlpha(1);
-      this.score = 0;
-      this.hitSound.play();
+    this.physics.add.overlap(this.dino, this.bonuses, (dino, bonus) => {
+      this.lives++;
+      this.livesText.setText(`Lives: ${this.lives}`);
+      this.reachSound.play(); // Vous pouvez ajouter un autre son pour le bonus si vous le souhaitez
+      bonus.disableBody(true, true);
     }, null, this);
   }
 
@@ -173,6 +206,10 @@ class PlayScene extends Phaser.Scene {
 
   handleInputs() {
     this.restart.on('pointerdown', () => {
+      this.lives = 1;
+      this.livesText.setText(`Lives: ${this.lives}`);
+      this.scoreText.setText("00000");
+      this.canCollide = true;
       this.dino.setVelocityY(0);
       this.dino.body.height = 92;
       this.dino.body.offset.y = 0;
@@ -229,6 +266,12 @@ class PlayScene extends Phaser.Scene {
     obsticle.setImmovable();
   }
 
+  spawnBonus() {
+    const bonus = this.bonuses.create(this.game.config.width + Phaser.Math.Between(800, 1500), this.game.config.height - Phaser.Math.Between(100, 300), 'bonus');
+    bonus.setOrigin(0, 1);
+    bonus.setImmovable();
+  }
+  
   update(time, delta) {
     if (!this.isGameRunning) { return; }
 
@@ -260,6 +303,20 @@ class PlayScene extends Phaser.Scene {
     } else {
       this.dino.body.height <= 58 ? this.dino.play('dino-down-anim', true) : this.dino.play('dino-run', true);
     }
+
+    this.bonusRespawnTime += delta * this.gameSpeed * 0.08;
+    if (this.bonusRespawnTime >= 15000) {
+      this.spawnBonus();
+      this.bonusRespawnTime = 0;
+    }
+
+    Phaser.Actions.IncX(this.bonuses.getChildren(), -this.gameSpeed);
+
+this.bonuses.getChildren().forEach(bonus => {
+  if (bonus.getBounds().right < 0) {
+    this.bonuses.killAndHide(bonus);
+  }
+});
   }
 }
 
