@@ -25,12 +25,7 @@ class PreloadScene extends Phaser.Scene {
 
     this.load.image("moon", "assets/moon.png");
 
-    this.load.image("obsticle-1", "assets/enemy_small_1.png");
-    this.load.image("obsticle-2", "assets/enemy_small_2.png");
-    this.load.image("obsticle-3", "assets/enemy_small_3.png");
-    this.load.image("obsticle-4", "assets/enemy_big_1.png");
-    this.load.image("obsticle-5", "assets/enemy_big_2.png");
-    this.load.image("obsticle-6", "assets/enemy_big_3.png");
+    this.load.image("bonus", "assets/bonus_life.png");
 
     this.load.spritesheet("star", "assets/stars.png", {
       frameWidth: 9,
@@ -51,6 +46,16 @@ class PreloadScene extends Phaser.Scene {
       frameWidth: 92,
       frameHeight: 77,
     });
+
+    this.load.image("obsticle-1", "assets/enemy_small_1.png");
+    this.load.image("obsticle-2", "assets/enemy_small_2.png");
+    this.load.image("obsticle-3", "assets/enemy_small_3.png");
+    this.load.image("obsticle-4", "assets/enemy_big_1.png");
+    this.load.image("obsticle-5", "assets/enemy_big_2.png");
+    this.load.image("obsticle-6", "assets/enemy_big_3.png");
+
+    this.load.image("tuyau", "assets/tuyau.png");
+
   }
 
   create() {
