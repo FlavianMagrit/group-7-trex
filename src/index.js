@@ -1,4 +1,3 @@
-
 import Phaser from 'phaser';
 
 import PlayScene from './PlayScene';
@@ -9,6 +8,7 @@ const config = {
   type: Phaser.AUTO,
   width: 1000,
   height: 340,
+  parent: "game-container",
   pixelArt: true,
   transparent: true,
   physics: {
@@ -17,7 +17,10 @@ const config = {
       debug: false
     }
   },
-  scene: [PreloadScene, LoginForm, PlayScene]
+  scene: [PreloadScene, LoginForm, PlayScene],
+  dom: {
+    createContainer: true,
+  },
 };
 
 new Phaser.Game(config);

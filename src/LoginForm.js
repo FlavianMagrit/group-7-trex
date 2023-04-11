@@ -1,65 +1,53 @@
-import Phaser from "phaser";
+
+import Phaser from 'phaser';
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAWaR74CQIpQC3EZ4ANtRDkhqbSaV_IsVI",
+    authDomain: "t-rex-7a5e1.firebaseapp.com",
+    projectId: "t-rex-7a5e1",
+    storageBucket: "t-rex-7a5e1.appspot.com",
+    messagingSenderId: "45729220216",
+    appId: "1:45729220216:web:9f235bdf8bf6ff272dcf8d",
+    measurementId: "G-XYMRDDVWMV"
+};
+
+firebase.initializeApp(firebaseConfig);
 
 class LoginForm extends Phaser.Scene {
     constructor() {
-        super("LoginForm");
+        super({ key: 'LoginForm' });
     }
 
     create() {
+        const signupForm = this.add.dom(this.cameras.main.width / 2, this.cameras.main.height / 2)
+            .createFromHTML(`
+        <form id="signup-form">
+          <h1>Inscription</h1>
+          <input type="email" id="email-input" placeholder="Email" required>
+          <input type="password" id="password-input" placeholder="Mot de passe" required>
+          <button type="submit">S'inscrire</button>
+        </form>
+      `);
 
-        const text = this.add.text(10, 10, 'Please login to play', {
-            color: 'black',
-            fontFamily: 'Arial',
-            fontSize: '32px '
+
+        signupForm.addListener('submit');
+        signupForm.on('submit', (event) => {
+            event.preventDefault();
+
+            const email = document.getElementById('email-input').value;
+            const password = document.getElementById('password-input').value;
+
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    console.log('Inscription réussie !', userCredential);
+                })
+                .catch((error) => {
+                    console.log('Erreur d\'inscription :', error.message);
+                });
         });
-
-        const element = this.add.dom(0, 0).createFromCache('nameform');
-
-        console.log(this.cache.html.entries);
-        console.log(element);
-
-        element.addListener('click');
-
-        element.on('click', function (event) {
-
-            if (event.target.name === 'loginButton') {
-                const inputUsername = this.getChildByName('username');
-                const inputPassword = this.getChildByName('password');
-
-                //  Have they entered anything?
-                if (inputUsername.value !== '' && inputPassword.value !== '') {
-                    //  Turn off the click events
-                    this.removeListener('click');
-
-                    //  Tween the login form out
-                    this.scene.tweens.add({targets: element.rotate3d, x: 1, w: 90, duration: 3000, ease: 'Power3'});
-
-                    this.scene.tweens.add({
-                        targets: element, scaleX: 2, scaleY: 2, y: 700, duration: 3000, ease: 'Power3',
-                        onComplete: function () {
-                            element.setVisible(false);
-                        }
-                    });
-
-                    //  Populate the text with whatever they typed in as the username!
-                    text.setText('Welcome ' + inputUsername.value);
-
-                } else {
-                    //  Flash the prompt
-                    this.scene.tweens.add({targets: text, alpha: 0.1, duration: 200, ease: 'Power3', yoyo: true});
-                }
-            }
-
-        });
-
-        this.tweens.add({
-            targets: element,
-            y: 300,
-            duration: 3000,
-            ease: 'Power3'
-        });
-
-
     }
 }
 
