@@ -19,19 +19,19 @@ class PreloadScene extends Phaser.Scene {
     this.load.image("restart", "assets/restart.png");
     this.load.image("game-over", "assets/game-over.png");
     this.load.image("cloud", "assets/cloud.png");
-    
+
     this.load.spritesheet("star", "assets/stars.png", {
       frameWidth: 9,
       frameHeight: 9,
     });
-    
+
     this.load.image('moon', 'assets/moon.png');
-    
+
     this.load.spritesheet('mario', 'assets/mario-run.png', {
       frameWidth: 88,
       frameHeight: 94,
     });
-    
+
     this.load.image('mario-jump', 'assets/mario-jump.png')
 
     this.load.spritesheet("mario-down", "assets/mario-down.png", {
@@ -50,6 +50,8 @@ class PreloadScene extends Phaser.Scene {
     this.load.image("obsticle-4", "assets/enemy_big_1.png");
     this.load.image("obsticle-5", "assets/enemy_big_2.png");
     this.load.image("obsticle-6", "assets/enemy_big_3.png");
+
+    this.load.image('bonus', 'assets/bonus_life.png');
 
     this.load.image("tuyau", "assets/tuyau.png");
   }
