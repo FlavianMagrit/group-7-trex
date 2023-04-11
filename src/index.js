@@ -2,6 +2,7 @@
 import Phaser from 'phaser';
 
 import PlayScene from './PlayScene';
+import LoginForm from './LoginForm';
 import PreloadScene from './PreloadScene';
 
 const config = {
@@ -16,7 +17,7 @@ const config = {
       debug: false
     }
   },
-  scene: [PreloadScene, PlayScene]
+  scene: [PreloadScene, LoginForm, PlayScene]
 };
 
 new Phaser.Game(config);
