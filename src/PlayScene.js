@@ -2,7 +2,7 @@ import Phaser from "phaser";
 
 class PlayScene extends Phaser.Scene {
   constructor() {
-    super('PlayScene');
+    super("PlayScene");
     this.lives = 1;
   }
 
@@ -13,10 +13,16 @@ class PlayScene extends Phaser.Scene {
     this.respawnTime = 0;
     this.score = 0;
     this.bonusRespawnTime = 0;
+    this.lives = 0;
 
-    this.livesText = this.add.text(0, 0, `Lives: ${this.lives}`, {fill: "#535353", font: '900 35px Courier', resolution: 5})
-        .setOrigin(0, 0)
-        .setAlpha(1);
+    this.livesText = this.add
+      .text(0, 0, `Lives: ${this.lives}`, {
+        fill: "#535353",
+        font: "900 35px Courier",
+        resolution: 5,
+      })
+      .setOrigin(0, 0)
+      .setAlpha(1);
 
     this.bonuses = this.physics.add.group();
 
@@ -25,37 +31,37 @@ class PlayScene extends Phaser.Scene {
     this.reachSound = this.sound.add("reach", { volume: 0.2 });
 
     this.startTrigger = this.physics.add
-        .sprite(0, 10)
-        .setOrigin(0, 1)
-        .setImmovable();
+      .sprite(0, 10)
+      .setOrigin(0, 1)
+      .setImmovable();
     this.ground = this.add
-        .tileSprite(0, height, 88, 26, "ground")
-        .setOrigin(0, 0.5);
+      .tileSprite(0, height, 88, 26, "ground")
+      .setOrigin(0, 0.5);
     this.mario = this.physics.add
-        .sprite(0, height, "mario-idle")
-        .setCollideWorldBounds(true)
-        .setGravityY(5000)
-        .setBodySize(44, 92)
-        .setDepth(1)
-        .setOrigin(0, 1);
+      .sprite(0, height, "mario-idle")
+      .setCollideWorldBounds(true)
+      .setGravityY(5000)
+      .setBodySize(44, 92)
+      .setDepth(1)
+      .setOrigin(0, 1);
 
     this.scoreText = this.add
-        .text(width, 0, "00000", {
-          fill: "#535353",
-          font: "900 35px Courier",
-          resolution: 5,
-        })
-        .setOrigin(1, 0)
-        .setAlpha(0);
+      .text(width, 0, "00000", {
+        fill: "#535353",
+        font: "900 35px Courier",
+        resolution: 5,
+      })
+      .setOrigin(1, 0)
+      .setAlpha(0);
 
     this.highScoreText = this.add
-        .text(0, 0, "00000", {
-          fill: "#535353",
-          font: "900 35px Courier",
-          resolution: 5,
-        })
-        .setOrigin(1, 0)
-        .setAlpha(0);
+      .text(0, 0, "00000", {
+        fill: "#535353",
+        font: "900 35px Courier",
+        resolution: 5,
+      })
+      .setOrigin(1, 0)
+      .setAlpha(0);
 
     this.environment = this.add.group();
 
@@ -71,14 +77,13 @@ class PlayScene extends Phaser.Scene {
     this.environment.setAlpha(0);
 
     this.gameOverScreen = this.add
-        .container(width / 2, height / 2 - 50)
-        .setAlpha(0);
+      .container(width / 2, height / 2 - 50)
+      .setAlpha(0);
     this.gameOverText = this.add.image(0, 0, "game-over");
     this.restart = this.add.image(0, 80, "restart").setInteractive();
     this.gameOverScreen.add([this.gameOverText, this.restart]);
 
     this.obsticles = this.physics.add.group();
-
 
     this.initAnims();
     this.initStartTrigger();
@@ -90,100 +95,110 @@ class PlayScene extends Phaser.Scene {
   initColliders() {
     this.canCollide = true;
     this.physics.add.collider(
-        this.mario,
-        this.obsticles,
-        () => {
-          if (!this.canCollide) return;
-          this.canCollide = false;
-          this.lives--;
+      this.mario,
+      this.obsticles,
+      () => {
+        if (!this.canCollide) return;
+        this.canCollide = false;
+        this.lives--;
 
-          if (this.lives > 0) {
-            this.livesText.setText(`Lives: ${this.lives}`);
-            this.mario.setTint(0xff0000);
-            this.time.delayedCall(1000, () => {
+        if (this.lives > 0) {
+          this.livesText.setText(`Lives: ${this.lives}`);
+          this.mario.setTint(0xff0000);
+          this.time.delayedCall(
+            1000,
+            () => {
               this.mario.clearTint();
               this.canCollide = true;
-            }, [], this);
-          }
-          else {
-            this.hitSound.play();
-            this.lives = 0;
-            this.livesText.setText(`Lives: ${this.lives}`);
-            this.highScoreText.x = this.scoreText.x - this.scoreText.width - 20;
+            },
+            [],
+            this
+          );
+        } else {
+          this.hitSound.play();
+          this.lives = 0;
+          this.livesText.setText(`Lives: ${this.lives}`);
+          this.highScoreText.x = this.scoreText.x - this.scoreText.width - 20;
 
-            const highScore = this.highScoreText.text.substr(
-                this.highScoreText.text.length - 5
-            );
-            const newScore =
-                Number(this.scoreText.text) > Number(highScore)
-                    ? this.scoreText.text
-                    : highScore;
+          const highScore = this.highScoreText.text.substr(
+            this.highScoreText.text.length - 5
+          );
+          const newScore =
+            Number(this.scoreText.text) > Number(highScore)
+              ? this.scoreText.text
+              : highScore;
 
-            this.highScoreText.setText("HI " + newScore);
-            this.highScoreText.setAlpha(1);
+          this.highScoreText.setText("HI " + newScore);
+          this.highScoreText.setAlpha(1);
 
-            this.physics.pause();
-            this.isGameRunning = false;
-            this.anims.pauseAll();
-            this.mario.setTexture("mario-hurt");
-            this.respawnTime = 0;
-            this.gameSpeed = 10;
-            this.gameOverScreen.setAlpha(1);
-            this.score = 0;
-            this.music.stop();
-          }
-        },
-        null,
-        this
+          this.physics.pause();
+          this.isGameRunning = false;
+          this.anims.pauseAll();
+          this.mario.setTexture("mario-hurt");
+          this.respawnTime = 0;
+          this.gameSpeed = 10;
+          this.gameOverScreen.setAlpha(1);
+          this.score = 0;
+          this.music.stop();
+        }
+      },
+      null,
+      this
     );
 
-    this.physics.add.overlap(this.mario, this.bonuses, (mario, bonus) => {
-      this.lives++;
-      this.livesText.setText(`Lives: ${this.lives}`);
-      this.reachSound.play();
-      bonus.disableBody(true, true);
-    }, null, this);
+    this.physics.add.overlap(
+      this.mario,
+      this.bonuses,
+      (mario, bonus) => {
+        this.lives++;
+        this.livesText.setText(`Lives: ${this.lives}`);
+        this.reachSound.play();
+        bonus.disableBody(true, true);
+      },
+      null,
+      this
+    );
   }
 
   initStartTrigger() {
     const { width, height } = this.game.config;
     this.physics.add.overlap(
-        this.startTrigger,
-        this.mario,
-        () => {
-          if (this.startTrigger.y === 10) {
-            this.startTrigger.body.reset(0, height);
-            return;
-          }
+      this.startTrigger,
+      this.mario,
+      () => {
+        if (this.startTrigger.y === 10) {
+          this.startTrigger.body.reset(0, height);
+          return;
+        }
 
-          this.startTrigger.disableBody(true, true);
+        this.startTrigger.disableBody(true, true);
 
-          const startEvent = this.time.addEvent({
-            delay: 1000 / 60,
-            loop: true,
-            callbackScope: this,
-            callback: () => {
-              this.mario.setVelocityX(80);
-              this.mario.play("mario-run", 1);
+        const startEvent = this.time.addEvent({
+          delay: 1000 / 60,
+          loop: true,
+          callbackScope: this,
+          callback: () => {
+            this.mario.setVelocityX(80);
+            this.mario.play("mario-run", 1);
 
-              if (this.ground.width < width) {
-                this.ground.width += 17 * 2;
-              }
+            if (this.ground.width < width) {
+              this.ground.width += 17 * 2;
+            }
 
-              if (this.ground.width >= 1000) {
-                this.ground.width = width;
-                this.isGameRunning = true;
-                this.mario.setVelocityX(0);
-                this.scoreText.setAlpha(1);
-                this.environment.setAlpha(1);
-                startEvent.remove();
-              }
-            },
-          });
-          this.music.play();
-        },
-        null,
-        this
+            if (this.ground.width >= 1000) {
+              this.ground.width = width;
+              this.isGameRunning = true;
+              this.mario.setVelocityX(0);
+              this.scoreText.setAlpha(1);
+              this.environment.setAlpha(1);
+              startEvent.remove();
+            }
+          },
+        });
+        this.music.play();
+      },
+      null,
+      this
     );
   }
 
@@ -252,7 +267,7 @@ class PlayScene extends Phaser.Scene {
   }
 
   handleInputs() {
-    this.restart.on('pointerdown', () => {
+    this.restart.on("pointerdown", () => {
       this.lives = 1;
       this.livesText.setText(`Lives: ${this.lives}`);
       this.scoreText.setText("00000");
@@ -269,15 +284,20 @@ class PlayScene extends Phaser.Scene {
     });
 
     const jumpSounds = [
-      {n: "jump", v: 0.2 },
-      {n: "jump2", v: 0.8 }
+      { n: "jump", v: 0.2 },
+      { n: "jump2", v: 0.8 },
     ];
 
     this.input.keyboard.on("keydown_SPACE", () => {
-      if (!this.mario.body.onFloor() || this.mario.body.velocity.x > 0 || this.gameOverScreen.alpha === 1) return;
+      if (
+        !this.mario.body.onFloor() ||
+        this.mario.body.velocity.x > 0 ||
+        this.gameOverScreen.alpha === 1
+      )
+        return;
 
       const randomJumpSound =
-          jumpSounds[Math.floor(Math.random() * jumpSounds.length)];
+        jumpSounds[Math.floor(Math.random() * jumpSounds.length)];
       this.sound.play(randomJumpSound.n, { volume: randomJumpSound.v });
 
       this.mario.body.height = 92;
@@ -308,35 +328,35 @@ class PlayScene extends Phaser.Scene {
   placeObsticle() {
     const obsticleNum = Math.floor(Math.random() * 8) + 1;
     const distance = Phaser.Math.Between(600, 900);
-    console.log(obsticleNum)
+    console.log(obsticleNum);
     let obsticle;
     if (obsticleNum == 7) {
       const enemyHeight = [20, 50];
       obsticle = this.obsticles
-          .create(
-              this.game.config.width + distance,
-              this.game.config.height - enemyHeight[Math.floor(Math.random() * 2)],
-              `enemy-bill`
-          )
-          .setOrigin(0, 1);
+        .create(
+          this.game.config.width + distance,
+          this.game.config.height - enemyHeight[Math.floor(Math.random() * 2)],
+          `enemy-bill`
+        )
+        .setOrigin(0, 1);
       obsticle.play("enemy-mario-fly", 1);
       obsticle.body.height = obsticle.body.height / 1.5;
-    } else if(obsticleNum == 8){
+    } else if (obsticleNum == 8) {
       obsticle = this.obsticles
-          .create(
-              this.game.config.width + distance,
-              this.game.config.height - 50,
-              `tuyau`
-          )
-          .setOrigin(0, 2);
-    }else {
+        .create(
+          this.game.config.width + distance,
+          this.game.config.height - 50,
+          `tuyau`
+        )
+        .setOrigin(0, 2);
+    } else {
       obsticle = this.obsticles
-          .create(
-              this.game.config.width + distance,
-              this.game.config.height,
-              `obsticle-${obsticleNum}`
-          )
-          .setOrigin(0, 1);
+        .create(
+          this.game.config.width + distance,
+          this.game.config.height,
+          `obsticle-${obsticleNum}`
+        )
+        .setOrigin(0, 1);
 
       obsticle.body.offset.y = +10;
     }
@@ -345,9 +365,29 @@ class PlayScene extends Phaser.Scene {
   }
 
   spawnBonus() {
-    const bonus = this.bonuses.create(this.game.config.width + Phaser.Math.Between(800, 1500), this.game.config.height - Phaser.Math.Between(100, 300), 'bonus');
+    const bonus = this.bonuses.create(
+      this.game.config.width + Phaser.Math.Between(800, 1500),
+      this.game.config.height - Phaser.Math.Between(100, 300),
+      "bonus"
+    );
     bonus.setOrigin(0, 1);
     bonus.setImmovable();
+  }
+
+  placepeach() {
+    const distance = Phaser.Math.Between(600, 900);
+    let peach;
+    peach = this.peach
+      .create(
+        this.game.config.width + distance,
+        this.game.config.height,
+        `peach-${peachNum}`
+      )
+      .setOrigin(0, 1);
+
+    peach.body.offset.y = +10;
+
+    peach.setImmovable();
   }
 
   update(time, delta) {
@@ -362,6 +402,7 @@ class PlayScene extends Phaser.Scene {
     this.respawnTime += delta * this.gameSpeed * 0.08;
     if (this.respawnTime >= 1500) {
       this.placeObsticle();
+      this.placePeach(this.mario, this.lives);
       this.respawnTime = 0;
     }
 
@@ -382,8 +423,8 @@ class PlayScene extends Phaser.Scene {
       this.mario.setTexture("mario-jump", 0);
     } else {
       this.mario.body.height <= 58
-          ? this.mario.play("mario-down-anim", true)
-          : this.mario.play("mario-run", true);
+        ? this.mario.play("mario-down-anim", true)
+        : this.mario.play("mario-run", true);
     }
 
     this.bonusRespawnTime += delta * this.gameSpeed * 0.08;
@@ -394,7 +435,7 @@ class PlayScene extends Phaser.Scene {
 
     Phaser.Actions.IncX(this.bonuses.getChildren(), -this.gameSpeed);
 
-    this.bonuses.getChildren().forEach(bonus => {
+    this.bonuses.getChildren().forEach((bonus) => {
       if (bonus.getBounds().right < 0) {
         this.bonuses.killAndHide(bonus);
       }
