@@ -295,11 +295,11 @@ class PlayScene extends Phaser.Scene {
   }
 
   placeObsticle() {
-    const obsticleNum = Math.floor(Math.random() * 7) + 1;
+    const obsticleNum = Math.floor(Math.random() * 8) + 1;
     const distance = Phaser.Math.Between(600, 900);
 
     let obsticle;
-    if (obsticleNum > 6) {
+    if (obsticleNum == 7) {
       const enemyHeight = [20, 50];
       obsticle = this.obsticles
           .create(
@@ -310,7 +310,15 @@ class PlayScene extends Phaser.Scene {
           .setOrigin(0, 1);
       obsticle.play("enemy-mario-fly", 1);
       obsticle.body.height = obsticle.body.height / 1.5;
-    } else {
+    } else if(obsticleNum == 8){
+      obsticle = this.obsticles
+          .create(
+              this.game.config.width + distance,
+              this.game.config.height - 50,
+              `tuyau`
+          )
+          .setOrigin(0, 2);
+    }else {
       obsticle = this.obsticles
           .create(
               this.game.config.width + distance,
