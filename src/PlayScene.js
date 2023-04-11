@@ -272,18 +272,21 @@ class PlayScene extends Phaser.Scene {
     const jumpSounds = ["jump", "jump2"];
 
     this.input.keyboard.on("keydown_SPACE", () => {
-      if (!this.mario.body.onFloor() || this.mario.body.velocity.x > 0) {
+      if (!this.mario.body.onFloor() || this.mario.body.velocity.x > 0 || this.gameOverScreen.alpha === 1) {
         return;
       }
-
-      const randomJumpSound =
-          jumpSounds[Math.floor(Math.random() * jumpSounds.length)];
-      this.sound.play(randomJumpSound, { volume: 0.2 });
 
       this.mario.body.height = 92;
       this.mario.body.offset.y = 0;
       this.mario.setVelocityY(-1600);
+
+      console.log(this.alpha)
+
+      const randomJumpSound =
+          jumpSounds[Math.floor(Math.random() * jumpSounds.length)];
+      this.sound.play(randomJumpSound, { volume: 0.2 });
       this.mario.setTexture("mario-jump", 0);
+
     });
 
     this.input.keyboard.on("keydown_DOWN", () => {
