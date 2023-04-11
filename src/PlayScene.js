@@ -307,7 +307,6 @@ class PlayScene extends Phaser.Scene {
 
   placeObsticle() {
     const obsticleNum = Math.floor(Math.random() * 8) + 1;
-    const obsticleNum = 8
     const distance = Phaser.Math.Between(600, 900);
     console.log(obsticleNum)
     let obsticle;
