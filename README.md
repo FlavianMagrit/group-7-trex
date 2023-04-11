@@ -1,8 +1,9 @@
 To start the game run:
 
-1. ```npm install```
-2. ```npm run dev```
-3. open ```localhost:8080```
+1. ```nvm use 16.20.0```
+2. ```npm install```
+3. ```npm run dev```
+4. open ```localhost:8080```
 
 
 # Offline T-Rex - Mario remix
