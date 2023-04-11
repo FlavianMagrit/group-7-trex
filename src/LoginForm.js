@@ -13,11 +13,10 @@ class LoginForm extends Phaser.Scene {
             fontSize: '32px '
         });
 
-        const element = this.add.dom(400, 600).createFromCache('nameform');
+        const element = this.add.dom(0, 0).createFromCache('nameform');
 
+        console.log(this.cache.html.entries);
         console.log(element);
-
-        // element.setPerspective(800);
 
         element.addListener('click');
 
