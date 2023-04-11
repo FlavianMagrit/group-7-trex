@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+
 class PreloadScene extends Phaser.Scene {
   constructor() {
     super("PreloadScene");
@@ -45,6 +46,7 @@ class PreloadScene extends Phaser.Scene {
       frameWidth: 118,
       frameHeight: 94,
     });
+
     this.load.spritesheet("enemy-bill", "assets/enemy-bill.png", {
       frameWidth: 92,
       frameHeight: 77,
@@ -55,4 +57,5 @@ class PreloadScene extends Phaser.Scene {
     this.scene.start("PlayScene");
   }
 }
+
 export default PreloadScene;
