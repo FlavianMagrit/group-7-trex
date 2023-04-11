@@ -1,5 +1,5 @@
 node_modules
-build
+
 # Mac Files
 .DS_Store
 
@@ -30,8 +30,6 @@ coverage
 # nyc test coverage
 .nyc_output
 
-# Compiled binary addons (https://nodejs.org/api/addons.html)
-build/Release
 
 # Dependency directories
 node_modules/
@@ -78,5 +76,4 @@ typings/
 tmp/
 temp/
 
-dist/
-build/
+.vercel
