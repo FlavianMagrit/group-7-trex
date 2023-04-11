@@ -54,11 +54,11 @@ class PreloadScene extends Phaser.Scene {
   }
 
   create() {
-    this.input.on('pointerup', function (pointer) {
 
-      this.scene.start('PlayScene');
 
-    }, this);
+      this.scene.start('LoginForm');
+
+
   }
 }
 

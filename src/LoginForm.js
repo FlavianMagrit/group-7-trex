@@ -2,7 +2,7 @@ var config = {
     type: Phaser.AUTO,
     width: 800,
     height: 600,
-    parent: 'phaser-example',
+    parent: 'PlayScene',
     dom: {
         createContainer: true
     },
@@ -65,7 +65,6 @@ function create ()
                 //  Flash the prompt
                 this.scene.tweens.add({ targets: text, alpha: 0.1, duration: 200, ease: 'Power3', yoyo: true });
             }
-            this.scene.scene.start("PlayScene");
         }
 
     });
