@@ -1,4 +1,7 @@
 import Phaser from "phaser";
+import firebase from "firebase/compat/app"
+import "firebase/compat/auth"
+import "firebase/compat/firestore"
 
 class PlayScene extends Phaser.Scene {
   constructor() {
@@ -15,15 +18,29 @@ class PlayScene extends Phaser.Scene {
     this.bonusRespawnTime = 0;
     this.lives = 1;
     this.musicStarted = false;
+    this.currentUser = null;
+
+    if (firebase.auth().currentUser) {
+      this.currentUser = firebase.auth().currentUser.email;
+    }
 
     this.livesText = this.add
-      .text(0, 0, `Lives: ${this.lives}`, {
+      .text(0, 0, this.lives > 1 ? `Lives: ${this.lives}` : `Life: ${this.lives}`, {
         fill: "#535353",
         font: "900 35px Courier",
         resolution: 5,
       })
       .setOrigin(0, 0)
       .setAlpha(1);
+
+    this.usserText = this.add
+        .text(250, 0, this.currentUser !== null ? `Current User: ${this.currentUser}` : '', {
+          fill: "#535353",
+          font: "900 35px Courier",
+          resolution: 5,
+        })
+        .setOrigin(0, 0)
+        .setAlpha(1);
 
     this.bonuses = this.physics.add.group();
 
@@ -43,11 +60,11 @@ class PlayScene extends Phaser.Scene {
     this.reachSound = this.sound.add("reach", { volume: 0.2 });
 
     this.startTrigger = this.physics.add
-      .sprite(0, 10)
+      .sprite(0, 400)
       .setOrigin(0, 1)
       .setImmovable();
     this.ground = this.add
-      .tileSprite(0, height, 88, 26, "ground")
+      .tileSprite(0, height, 88, 40, "ground")
       .setOrigin(0, 0.5);
     this.mario = this.physics.add
       .sprite(0, height, "mario-idle")
