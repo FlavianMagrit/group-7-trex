@@ -1,12 +1,17 @@
-import Phaser from "phaser";
+import Phaser from 'phaser';
 
-import PlayScene from "./PlayScene";
-import PreloadScene from "./PreloadScene";
+import PreloadScene from './PreloadScene';
+import PlayScene from './PlayScene';
+import LoginForm from './LoginForm';
+import Menu from './Menu';
+import Instructions from './Instructions';
+
 
 const config = {
   type: Phaser.AUTO,
   width: screen.width - 200,
   height: 340,
+  parent: "game-container",
   pixelArt: true,
   transparent: true,
   physics: {
@@ -15,7 +20,10 @@ const config = {
       debug: false,
     },
   },
-  scene: [PreloadScene, PlayScene],
+  scene: [PreloadScene, LoginForm, Menu, Instructions, PlayScene],
+  dom: {
+    createContainer: true,
+  },
 };
 
 new Phaser.Game(config);

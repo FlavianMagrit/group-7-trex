@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import Menu from "./Menu";
 
 class PreloadScene extends Phaser.Scene {
   constructor() {
@@ -22,6 +23,7 @@ class PreloadScene extends Phaser.Scene {
     this.load.image("restart", "assets/restart.png");
     this.load.image("game-over", "assets/game-over.png");
     this.load.image("cloud", "assets/cloud.png");
+
 
     this.load.image("bonus", "assets/bonus_life.png");
 
@@ -56,13 +58,17 @@ class PreloadScene extends Phaser.Scene {
     this.load.image("obsticle-5", "assets/enemy_big_2.png");
     this.load.image("obsticle-6", "assets/enemy_big_3.png");
 
+    this.load.html('signup-form', 'assets/text/loginform.html');
+    this.load.html('menu', 'assets/text/menu.html');
+    this.load.html('instructions', 'assets/text/instructions.html');
+
     this.load.image("tuyau", "assets/tuyau.png");
 
     this.load.image("peach", "assets/peach.png");
   }
 
   create() {
-    this.scene.start("PlayScene");
+      this.scene.start('Menu');
   }
 }
 
