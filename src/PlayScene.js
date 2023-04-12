@@ -387,7 +387,7 @@ class PlayScene extends Phaser.Scene {
     }
 
     this.bonusRespawnTime += delta * this.gameSpeed * 0.08;
-    if (this.bonusRespawnTime >= 15000) {
+    if (this.bonusRespawnTime >= 30000) {
       this.spawnBonus();
       this.bonusRespawnTime = 0;
     }
