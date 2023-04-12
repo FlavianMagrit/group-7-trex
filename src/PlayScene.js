@@ -7,6 +7,7 @@ class PlayScene extends Phaser.Scene {
   }
 
   create() {
+    this.cameras.main.setBackgroundColor('#87CEEB');
     const { height, width } = this.game.config;
     this.gameSpeed = 10;
     this.isGameRunning = false;
@@ -44,7 +45,7 @@ class PlayScene extends Phaser.Scene {
       .setOrigin(0, 1)
       .setImmovable();
     this.ground = this.add
-      .tileSprite(0, height, 88, 26, "ground")
+      .tileSprite(0, height, 90, 50, "ground")
       .setOrigin(0, 0.5);
     this.mario = this.physics.add
       .sprite(0, height, "mario-idle")
@@ -52,7 +53,7 @@ class PlayScene extends Phaser.Scene {
       .setGravityY(5000)
       .setBodySize(44, 92)
       .setDepth(1)
-      .setOrigin(0, 1);
+      .setOrigin(0, 1.2);
 
     this.scoreText = this.add
       .text(width, 0, "00000", {
@@ -358,7 +359,7 @@ class PlayScene extends Phaser.Scene {
           this.game.config.height,
           `obsticle-${obsticleNum}`
         )
-        .setOrigin(0, 1);
+        .setOrigin(0, 1.2);
 
       obsticle.body.offset.y = +10;
     }
