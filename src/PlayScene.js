@@ -10,6 +10,7 @@ class PlayScene extends Phaser.Scene {
   }
 
   create() {
+    this.cameras.main.setBackgroundColor('#87CEEB');
     const { height, width } = this.game.config;
     this.gameSpeed = 10;
     this.isGameRunning = false;
@@ -422,12 +423,12 @@ class PlayScene extends Phaser.Scene {
     if (obsticleNum == 7) {
       const enemyHeight = [-10, 70, 140];
       obsticle = this.obsticles
-        .create(
-          this.game.config.width + distance,
-          this.game.config.height - enemyHeight[Math.floor(Math.random() * 3)],
-          `enemy-bill`
-        )
-        .setOrigin(0, 1);
+          .create(
+              this.game.config.width + distance,
+              this.game.config.height - enemyHeight[Math.floor(Math.random() * 3)],
+              `enemy-bill`
+          )
+          .setOrigin(0, 1);
       obsticle.play("enemy-mario-fly", 1);
       obsticle.body.height = obsticle.body.height / 1.5;
     } else if (obsticleNum == 8) {
@@ -504,7 +505,7 @@ class PlayScene extends Phaser.Scene {
         this.game.config.height,
         `peach`
       )
-      .setOrigin(0, 1);
+      .setOrigin(0, 1.2);
 
     peach.body.offset.y = +10;
 
