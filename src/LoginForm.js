@@ -1,8 +1,8 @@
 
 import Phaser from 'phaser';
-import * as firebase from 'firebase/app';
-import 'firebase/auth';
-
+import firebase from "firebase/compat/app"
+import "firebase/compat/auth"
+import "firebase/compat/firestore"
 
 const firebaseConfig = {
     apiKey: "AIzaSyAWaR74CQIpQC3EZ4ANtRDkhqbSaV_IsVI",
@@ -23,15 +23,7 @@ class LoginForm extends Phaser.Scene {
 
     create() {
         const signupForm = this.add.dom(this.cameras.main.width / 2, this.cameras.main.height / 2)
-            .createFromHTML(`
-        <form id="signup-form">
-          <h1>Inscription</h1>
-          <input type="email" id="email-input" placeholder="Email" required>
-          <input type="password" id="password-input" placeholder="Mot de passe" required>
-          <button type="submit">S'inscrire</button>
-        </form>
-      `);
-
+            .createFromCache(`signup-form`);
 
         signupForm.addListener('submit');
         signupForm.on('submit', (event) => {

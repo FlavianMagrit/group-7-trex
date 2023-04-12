@@ -52,7 +52,7 @@ class PreloadScene extends Phaser.Scene {
     this.load.image("obsticle-5", "assets/enemy_big_2.png");
     this.load.image("obsticle-6", "assets/enemy_big_3.png");
 
-    this.load.html('myForm', 'assets/text/loginform.html');
+    this.load.html('signup-form', 'assets/text/loginform.html');
   }
 
   create() {
