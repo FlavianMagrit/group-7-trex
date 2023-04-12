@@ -1,14 +1,21 @@
-import Phaser from 'phaser';
+import Phaser from "phaser";
 
-import PlayScene from './PlayScene';
-import RegisterForm from './RegisterForm.js';
-import PreloadScene from './PreloadScene';
-import LoginForm from './LoginForm';
-import Menu from './Menu';
-import Instructions from './Instructions';
+import PlayScene from "./PlayScene";
+import RegisterForm from "./RegisterForm.js";
+import PreloadScene from "./PreloadScene";
+import LoginForm from "./LoginForm";
+import Menu from "./Menu";
+import Instructions from "./Instructions";
 import firebase from "firebase/compat/app";
-import {firebaseConfig} from "./firebaseConfig";
+import { firebaseConfig } from "./firebaseConfig";
 
+import PlayScene from "./PlayScene";
+import RegisterForm from "./RegisterForm.js";
+import PreloadScene from "./PreloadScene";
+import LoginForm from "./LoginForm";
+import Menu from "./Menu";
+import Instructions from "./Instructions";
+import Leaderboard from "./Leaderboard";
 
 firebase.initializeApp(firebaseConfig);
 
@@ -25,7 +32,15 @@ const config = {
       debug: false,
     },
   },
-  scene: [PreloadScene, LoginForm, RegisterForm, Menu, Instructions, PlayScene],
+  scene: [
+    PreloadScene,
+    LoginForm,
+    RegisterForm,
+    Menu,
+    Instructions,
+    PlayScene,
+    Leaderboard,
+  ],
   dom: {
     createContainer: true,
   },
