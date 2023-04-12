@@ -1,7 +1,8 @@
 import Phaser from 'phaser';
 
-import PreloadScene from './PreloadScene';
 import PlayScene from './PlayScene';
+import RegisterForm from './RegisterForm.js';
+import PreloadScene from './PreloadScene';
 import LoginForm from './LoginForm';
 import Menu from './Menu';
 import Instructions from './Instructions';
@@ -10,7 +11,7 @@ import Instructions from './Instructions';
 const config = {
   type: Phaser.AUTO,
   width: screen.width - 200,
-  height: 340,
+  height: 600,
   parent: "game-container",
   pixelArt: true,
   transparent: true,
@@ -20,7 +21,7 @@ const config = {
       debug: false,
     },
   },
-  scene: [PreloadScene, LoginForm, Menu, Instructions, PlayScene],
+  scene: [PreloadScene, LoginForm, RegisterForm, Menu, Instructions, PlayScene],
   dom: {
     createContainer: true,
   },

@@ -3,7 +3,6 @@ import Phaser from "phaser";
 class PlayScene extends Phaser.Scene {
   constructor() {
     super("PlayScene");
-    this.lives = 1;
   }
 
   create() {
@@ -15,7 +14,9 @@ class PlayScene extends Phaser.Scene {
     this.peachRespawnTime = 0;
     this.score = 0;
     this.bonusRespawnTime = 0;
-    this.lives = 0;
+    this.lives = 1;
+    this.musicStarted = false;
+
 
     this.livesText = this.add
       .text(0, 0, `Lives: ${this.lives}`, {
@@ -28,10 +29,13 @@ class PlayScene extends Phaser.Scene {
 
     this.bonuses = this.physics.add.group();
 
-    this.load.audio('music', 'assets/audio/music.m4a');
+    this.load.audio('music', 'assets/sounds/music.m4a');
     this.load.once('complete', () => {
-      this.input.once('pointerdown', () => {
-        this.music.play();
+      this.input.keyboard.on("keydown_SPACE", () => {
+        if (!this.musicStarted) {
+          this.music.play();
+          this.musicStarted = true;
+        }
       }, this);
     });
     this.load.start();
@@ -41,7 +45,7 @@ class PlayScene extends Phaser.Scene {
     this.reachSound = this.sound.add("reach", { volume: 0.2 });
 
     this.startTrigger = this.physics.add
-      .sprite(0, 10)
+      .sprite(0, 400)
       .setOrigin(0, 1)
       .setImmovable();
     this.ground = this.add
@@ -217,7 +221,6 @@ class PlayScene extends Phaser.Scene {
             }
           },
         });
-        //this.music.play();
       },
       null,
       this
