@@ -1,0 +1,135 @@
+<style>
+    @import url("https://fonts.cdnfonts.com/css/new-super-mario-font-u");
+
+    body {
+        padding: 100px;
+        background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url("../assets/background.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-attachment: fixed;
+    }
+
+    h1 {
+        font-family: "New Super Mario Font U", sans-serif;
+        color: whitesmoke;
+    }
+
+    .flex {
+        display: flex;
+    }
+
+    .flex-col {
+        flex-direction: column;
+    }
+
+    .aic {
+        align-items: center;
+    }
+
+    .space-y-3 {
+        gap: 0.75rem;
+    }
+
+    .mt-4 {
+        margin-top: 1rem;
+    }
+
+    .mb-4 {
+        margin-bottom: 1rem;
+    }
+
+    .mtb-4 {
+        margin: 1rem 0;
+    }
+
+    .jcc {
+        justify-content: center;
+    }
+
+    .mia {
+        margin-inline: auto;
+    }
+
+    p {
+        color: aliceblue;
+        font-family: "New Super Mario Font U", sans-serif;
+    }
+
+    button {
+        background-color: chocolate;
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+        border: 2px solid black;
+        border-radius: 5px;
+        font-family: "New Super Mario Font U", sans-serif;
+        width: 75%;
+    }
+
+    input {
+        background-color: chocolate;
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+        border: 2px solid black;
+        border-radius: 5px;
+        padding-left: 15px;
+        font-family: "New Super Mario Font U", sans-serif;
+        color: white;
+        outline : none;
+    }
+    ::placeholder {
+        color: black;
+
+    }
+
+
+    a {
+        color: aliceblue;
+        font-size: 0.80rem;
+        font-family: "New Super Mario Font U", sans-serif;
+    }
+
+    .register {
+        display: none;
+    }
+
+    .register-error {
+        display: block;
+        color: red;
+        font-size: 0.80rem;
+        font-family: "New Super Mario Font U", sans-serif;
+    }
+
+    .main {
+        padding: 2rem;
+        background-color: rgba(0, 0, 0, 0.5);
+        border-radius: 15px;
+    }
+
+    .back-button {
+        height: fit-content;
+        width: fit-content;
+        margin-right: 1rem;
+    }
+
+</style>
+
+<div class="main">
+    <button id="back-menu" class="back-button">←</button>
+    <form id="signup-form">
+        <div class="flex jcc">
+            <h1>Inscription</h1>
+        </div>
+        <div class="flex flex-col space-y-3">
+            <input type="email" id="register-email-input" placeholder="Email" required>
+            <input type="password" id="register-password-input" placeholder="Mot de passe" required>
+            <p class="register" id="register-error">register-error</p>
+        </div>
+        <button class="flex jcc mia mtb-4" type="submit">S'inscrire</button>
+        <hr class="rounded">
+    </form>
+    <div class="flex flex-col aic">
+        <p>Déjà un compte ?</p>
+        <button id="to-login-scene">Connexion</button>
+    </div>
+</div>
