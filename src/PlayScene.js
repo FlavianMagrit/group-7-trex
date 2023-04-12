@@ -99,7 +99,6 @@ class PlayScene extends Phaser.Scene {
     this.physics.add.collider(
       this.mario,
       this.obsticles,
-      this.peachs,
       () => {
         if (!this.canCollide) return;
         this.canCollide = false;
@@ -157,6 +156,17 @@ class PlayScene extends Phaser.Scene {
         this.livesText.setText(`Lives: ${this.lives}`);
         this.reachSound.play();
         bonus.disableBody(true, true);
+      },
+      null,
+      this
+    );
+
+    this.physics.add.overlap(
+      this.mario,
+      this.peachs,
+      (mario, peach) => {
+        this.score += 100;
+        peach.disableBody(true, true);
       },
       null,
       this
