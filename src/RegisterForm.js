@@ -17,7 +17,12 @@ class RegisterForm extends Phaser.Scene {
 
         const loginButton = document.getElementById("to-login-scene");
         loginButton.addEventListener("click", () => {
-            this.scene.start('LoginForm')}
+            this.scene.start('Menu')}
+        );
+
+        const backButton = document.getElementById("back-menu");
+        backButton.addEventListener("click", () => {
+            this.scene.start('Menu')}
         );
 
         registerForm.addListener('submit');
