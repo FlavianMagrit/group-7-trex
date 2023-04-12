@@ -4,8 +4,6 @@ import "firebase/compat/auth"
 import "firebase/compat/firestore"
 import { firebaseConfig } from './firebaseConfig.js';
 
-firebase.initializeApp(firebaseConfig);
-
 class RegisterForm extends Phaser.Scene {
     constructor() {
         super({ key: 'RegisterForm' });
