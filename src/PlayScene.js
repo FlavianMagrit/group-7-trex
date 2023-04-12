@@ -27,7 +27,15 @@ class PlayScene extends Phaser.Scene {
 
     this.bonuses = this.physics.add.group();
 
-    this.music = this.sound.add("music", { volume: 0.4, loop: true });
+    this.load.audio('music', 'assets/audio/music.m4a');
+    this.load.once('complete', () => {
+      this.input.once('pointerdown', () => {
+        this.music.play();
+      }, this);
+    });
+    this.load.start();
+
+    this.music = this.sound.add('music', { volume: 0.4, loop: true });
     this.hitSound = this.sound.add("hit", { volume: 0.2 });
     this.reachSound = this.sound.add("reach", { volume: 0.2 });
 
@@ -208,7 +216,7 @@ class PlayScene extends Phaser.Scene {
             }
           },
         });
-        this.music.play();
+        //this.music.play();
       },
       null,
       this
