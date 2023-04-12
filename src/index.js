@@ -2,6 +2,7 @@ import Phaser from "phaser";
 
 import PlayScene from "./PlayScene";
 import PreloadScene from "./PreloadScene";
+import Leaderboard from "./Leaderboard";
 
 const config = {
   type: Phaser.AUTO,
@@ -15,7 +16,7 @@ const config = {
       debug: false,
     },
   },
-  scene: [PreloadScene, PlayScene],
+  scene: [PreloadScene, PlayScene, Leaderboard],
 };
 
 new Phaser.Game(config);
