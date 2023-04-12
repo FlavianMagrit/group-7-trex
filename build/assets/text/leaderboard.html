@@ -1,0 +1,120 @@
+<style>
+      @import url("https://fonts.cdnfonts.com/css/new-super-mario-font-u");
+
+      * {
+        font-family: "New Super Mario Font U", sans-serif;
+        color: whitesmoke;
+      }
+
+      h1 {
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+      }
+
+      p {
+        font-size: 1.25rem;
+        line-height: 0.5rem;
+      }
+
+      .green {
+        color: green;
+      }
+
+      .red {
+        color: red;
+      }
+
+      .orange {
+        color: orange;
+      }
+
+      .blue {
+        color: lightblue;
+      }
+
+      .gray {
+        color: gray;
+      }
+
+      .flex-row {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .icns {
+        height: 90px;
+      }
+
+      button {
+        background: none;
+        border: none;
+        padding: 0;
+        font: inherit;
+        cursor: pointer;
+        outline: inherit;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 90px;
+        height: 90px;
+      }
+
+      .buttonImg {
+        height: 50px;
+      }
+
+      .hwg {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 5rem;
+        gap: 1rem;
+      }
+
+      body {
+        padding: 100px;
+        background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
+          url("../assets/background-instruction.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-attachment: fixed;
+      }
+
+      button {
+          background-color: chocolate;
+          font-size: 1.25rem;
+          line-height: 1.75rem;
+          border: 2px solid black;
+          border-radius: 5px;
+          font-family: "New Super Mario Font U", sans-serif;
+          color: black;
+      }
+
+      .main {
+          padding: 2rem;
+          background-color: rgba(0, 0, 0, 0.5);
+          border-radius: 15px;
+      }
+
+      .back-button {
+          height: fit-content;
+          width: fit-content;
+          margin-right: 1rem;
+      }
+</style>
+
+<div class="main">
+    <button id="back-menu" class="back-button">←</button>
+    <h1>Leaderboard</h1>
+    <table>
+      <tr>
+        <th>Position</th>
+        <th>Player Name</th>
+        <th>Score</th>
+      </tr>
+    </table>
+</div>
