@@ -106,6 +106,7 @@ class PlayScene extends Phaser.Scene {
             }, [], this);
           }
           else {
+            this.hitSound.play();
             this.lives = 0;
             this.livesText.setText(`Lives: ${this.lives}`);
             this.highScoreText.x = this.scoreText.x - this.scoreText.width - 20;
@@ -129,7 +130,6 @@ class PlayScene extends Phaser.Scene {
             this.gameSpeed = 10;
             this.gameOverScreen.setAlpha(1);
             this.score = 0;
-            this.hitSound.play();
             this.music.stop();
           }
         },
@@ -178,10 +178,9 @@ class PlayScene extends Phaser.Scene {
                 this.environment.setAlpha(1);
                 startEvent.remove();
               }
-
-              this.music.play();
             },
           });
+          this.music.play();
         },
         null,
         this
@@ -269,16 +268,17 @@ class PlayScene extends Phaser.Scene {
       this.music.play();
     });
 
-    const jumpSounds = ["jump", "jump2"];
+    const jumpSounds = [
+      {n: "jump", v: 0.2 },
+      {n: "jump2", v: 0.8 }
+    ];
 
     this.input.keyboard.on("keydown_SPACE", () => {
-      if (!this.mario.body.onFloor() || this.mario.body.velocity.x > 0) {
-        return;
-      }
+      if (!this.mario.body.onFloor() || this.mario.body.velocity.x > 0 || this.gameOverScreen.alpha === 1) return;
 
       const randomJumpSound =
           jumpSounds[Math.floor(Math.random() * jumpSounds.length)];
-      this.sound.play(randomJumpSound, { volume: 0.2 });
+      this.sound.play(randomJumpSound.n, { volume: randomJumpSound.v });
 
       this.mario.body.height = 92;
       this.mario.body.offset.y = 0;
