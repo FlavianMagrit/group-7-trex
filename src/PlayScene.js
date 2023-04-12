@@ -1,7 +1,7 @@
 import Phaser from "phaser";
-import firebase from "firebase/compat/app"
-import "firebase/compat/auth"
-import "firebase/compat/firestore"
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
 
 class PlayScene extends Phaser.Scene {
   constructor() {
@@ -25,37 +25,51 @@ class PlayScene extends Phaser.Scene {
     }
 
     this.livesText = this.add
-      .text(0, 0, this.lives > 1 ? `Lives: ${this.lives}` : `Life: ${this.lives}`, {
-        fill: "#535353",
-        font: "900 35px Courier",
-        resolution: 5,
-      })
+      .text(
+        0,
+        0,
+        this.lives > 1 ? `Lives: ${this.lives}` : `Life: ${this.lives}`,
+        {
+          fill: "#535353",
+          font: "900 35px Courier",
+          resolution: 5,
+        }
+      )
       .setOrigin(0, 0)
       .setAlpha(1);
 
     this.usserText = this.add
-        .text(250, 0, this.currentUser !== null ? `Current User: ${this.currentUser}` : '', {
+      .text(
+        250,
+        0,
+        this.currentUser !== null ? `Current User: ${this.currentUser}` : "",
+        {
           fill: "#535353",
           font: "900 35px Courier",
           resolution: 5,
-        })
-        .setOrigin(0, 0)
-        .setAlpha(1);
+        }
+      )
+      .setOrigin(0, 0)
+      .setAlpha(1);
 
     this.bonuses = this.physics.add.group();
 
-    this.load.audio('music', 'assets/sounds/music.m4a');
-    this.load.once('complete', () => {
-      this.input.keyboard.on("keydown_SPACE", () => {
-        if (!this.musicStarted) {
-          this.music.play();
-          this.musicStarted = true;
-        }
-      }, this);
+    this.load.audio("music", "assets/sounds/music.m4a");
+    this.load.once("complete", () => {
+      this.input.keyboard.on(
+        "keydown_SPACE",
+        () => {
+          if (!this.musicStarted) {
+            this.music.play();
+            this.musicStarted = true;
+          }
+        },
+        this
+      );
     });
     this.load.start();
 
-    this.music = this.sound.add('music', { volume: 0.4, loop: true });
+    this.music = this.sound.add("music", { volume: 0.4, loop: true });
     this.hitSound = this.sound.add("hit", { volume: 0.2 });
     this.reachSound = this.sound.add("reach", { volume: 0.2 });
 
@@ -108,6 +122,7 @@ class PlayScene extends Phaser.Scene {
     this.gameOverScreen = this.add
       .container(width / 2, height / 2 - 50)
       .setAlpha(0);
+
     this.gameOverText = this.add.image(0, 0, "game-over");
     this.restart = this.add.image(0, 80, "restart").setInteractive();
     this.gameOverScreen.add([this.gameOverText, this.restart]);
@@ -159,6 +174,9 @@ class PlayScene extends Phaser.Scene {
               : highScore;
 
           this.highScoreText.setText("HI " + newScore);
+          if (this.currentUser !== null) {
+            this.addHighScore(this.currentUser, newScore);
+          }
           this.highScoreText.setAlpha(1);
 
           this.physics.pause();
@@ -199,6 +217,23 @@ class PlayScene extends Phaser.Scene {
       null,
       this
     );
+  }
+  addHighScore(name, score) {
+    // Récupérer la référence à la base de données Firestore
+    const db = firebase.firestore();
+
+    // Ajouter un nouveau document à la collection "highscores" avec les données fournies
+    db.collection("scores")
+      .add({
+        name: name,
+        score: score,
+      })
+      .then((docRef) => {
+        console.log("Score ajouté avec succès :", docRef.id);
+      })
+      .catch((error) => {
+        console.error("Erreur lors de l'ajout du score :", error);
+      });
   }
 
   initStartTrigger() {
@@ -352,14 +387,14 @@ class PlayScene extends Phaser.Scene {
     console.log(obsticleNum);
     let obsticle;
     if (obsticleNum == 7) {
-      const enemyHeight = [-10, 70,140];
+      const enemyHeight = [-10, 70, 140];
       obsticle = this.obsticles
-          .create(
-              this.game.config.width + distance,
-              this.game.config.height - enemyHeight[Math.floor(Math.random() * 3)],
-              `enemy-bill`
-          )
-          .setOrigin(0, 1);
+        .create(
+          this.game.config.width + distance,
+          this.game.config.height - enemyHeight[Math.floor(Math.random() * 3)],
+          `enemy-bill`
+        )
+        .setOrigin(0, 1);
       obsticle.play("enemy-mario-fly", 1);
       obsticle.body.height = obsticle.body.height / 1.5;
     } else if (obsticleNum == 8) {

@@ -70,7 +70,7 @@ class PreloadScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.start("Leaderboard");
+    this.scene.start("Menu");
   }
 }
 
