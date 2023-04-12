@@ -16,6 +16,7 @@ class PlayScene extends Phaser.Scene {
     this.lives = 1;
     this.musicStarted = false;
 
+
     this.livesText = this.add
       .text(0, 0, `Lives: ${this.lives}`, {
         fill: "#535353",
@@ -43,11 +44,11 @@ class PlayScene extends Phaser.Scene {
     this.reachSound = this.sound.add("reach", { volume: 0.2 });
 
     this.startTrigger = this.physics.add
-      .sprite(0, 10)
+      .sprite(0, 400)
       .setOrigin(0, 1)
       .setImmovable();
     this.ground = this.add
-      .tileSprite(0, height, 88, 26, "ground")
+      .tileSprite(0, height, 88, 40, "ground")
       .setOrigin(0, 0.5);
     this.mario = this.physics.add
       .sprite(0, height, "mario-idle")

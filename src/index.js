@@ -11,7 +11,7 @@ import Instructions from './Instructions';
 const config = {
   type: Phaser.AUTO,
   width: screen.width - 200,
-  height: 340,
+  height: 600,
   parent: "game-container",
   pixelArt: true,
   transparent: true,
