@@ -2,10 +2,7 @@ import Phaser from "phaser";
 import firebase from "firebase/compat/app"
 import "firebase/compat/auth"
 import "firebase/compat/firestore"
-<<<<<<< HEAD
 import { firebaseConfig } from './firebaseConfig.js';
-=======
->>>>>>> 8ce3511d78d4f7bbe07a7b7056bdda42b327157f
 
 class PlayScene extends Phaser.Scene {
   constructor() {
@@ -64,11 +61,7 @@ class PlayScene extends Phaser.Scene {
     this.reachSound = this.sound.add("reach", { volume: 0.2 });
 
     this.startTrigger = this.physics.add
-<<<<<<< HEAD
-      .sprite(10, 10)
-=======
       .sprite(0, 400)
->>>>>>> 8ce3511d78d4f7bbe07a7b7056bdda42b327157f
       .setOrigin(0, 1)
       .setImmovable();
     this.ground = this.add
@@ -344,7 +337,7 @@ class PlayScene extends Phaser.Scene {
                   });
       });
     }
-    
+
     const jumpSounds = [
       { n: "jump", v: 0.2 },
       { n: "jump2", v: 0.8 },
