@@ -1,4 +1,8 @@
 import Phaser from "phaser";
+import firebase from "firebase/compat/app"
+import "firebase/compat/auth"
+import "firebase/compat/firestore"
+import { firebaseConfig } from './firebaseConfig.js';
 
 class PlayScene extends Phaser.Scene {
   constructor() {
@@ -43,7 +47,7 @@ class PlayScene extends Phaser.Scene {
     this.reachSound = this.sound.add("reach", { volume: 0.2 });
 
     this.startTrigger = this.physics.add
-      .sprite(0, 10)
+      .sprite(10, 10)
       .setOrigin(0, 1)
       .setImmovable();
     this.ground = this.add
@@ -93,8 +97,13 @@ class PlayScene extends Phaser.Scene {
       .setAlpha(0);
     this.gameOverText = this.add.image(0, 0, "game-over");
     this.restart = this.add.image(0, 80, "restart").setInteractive();
-    this.gameOverScreen.add([this.gameOverText, this.restart]);
-
+    this.menu = this.add.image(0, 120, "menu").setInteractive();
+    if(firebase.auth().currentUser){
+      this.logout = this.add.image(0, 160, "logout").setInteractive();
+      this.gameOverScreen.add([this.gameOverText, this.restart, this.menu,this.logout]);
+    }else{
+      this.gameOverScreen.add([this.gameOverText, this.restart, this.menu]);
+    }
     this.obsticles = this.physics.add.group();
     this.peachs = this.physics.add.group();
 
@@ -296,6 +305,25 @@ class PlayScene extends Phaser.Scene {
       this.music.play();
     });
 
+    this.menu.on("pointerdown", () => {
+      this.scene.start('Menu');
+    });
+
+    if(firebase.auth().currentUser){
+      this.logout.on("pointerdown", () => {
+        firebase.auth().signOut()
+                  .then(() => {
+                      // L'utilisateur s'est déconnecté avec succès
+                      console.log('Utilisateur déconnecté avec succès');
+                      this.scene.start('Menu');
+                  })
+                  .catch((error) => {
+                      // Gérer les erreurs de déconnexion
+                      console.error('Erreur de déconnexion :', error);
+                  });
+      });
+    }
+    
     const jumpSounds = [
       { n: "jump", v: 0.2 },
       { n: "jump2", v: 0.8 },
