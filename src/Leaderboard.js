@@ -10,17 +10,18 @@ class Leaderboard extends Phaser.Scene {
 
   create() {
     this.add
-        .dom(this.cameras.main.width / 2, this.cameras.main.height / 2)
-        .createFromCache(`leaderboard`);
+      .dom(this.cameras.main.width / 2, this.cameras.main.height / 2)
+      .createFromCache(`leaderboard`);
 
     const collectionRef = firebase.firestore().collection("scores");
     const backButton = document.getElementById("back-menu");
 
     backButton.addEventListener("click", () => {
-      this.scene.start('Menu')}
-    );
+      this.scene.start("Menu");
+    });
 
     collectionRef
+      .orderBy("score", "desc")
       .get()
       .then((querySnapshot) => {
         const leaderboardTable = document.querySelector("table");
