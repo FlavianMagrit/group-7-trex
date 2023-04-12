@@ -19,6 +19,7 @@ class PreloadScene extends Phaser.Scene {
     this.load.image("mario-hurt", "assets/mario-hurt.png");
     this.load.image("mario-jump", "assets/mario-jump.png");
 
+    this.load.image("ground", "assets/groundgrass.png");
     this.load.image("restart", "assets/restart.png");
     this.load.image("menu", "assets/menu.png");
     this.load.image("logout", "assets/logout.png");

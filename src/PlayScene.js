@@ -80,7 +80,7 @@ class PlayScene extends Phaser.Scene {
       .setOrigin(0, 1)
       .setImmovable();
     this.ground = this.add
-      .tileSprite(0, height, 88, 0)
+      .tileSprite(0, height, 88, 40, "ground")
       .setOrigin(0, 0.5);
     this.mario = this.physics.add
       .sprite(0, height, "mario-idle")
