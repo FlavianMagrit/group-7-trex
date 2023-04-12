@@ -377,7 +377,7 @@ class PlayScene extends Phaser.Scene {
     bonus.setImmovable();
   }
 
-  placepeach() {
+  placePeach() {
     const distance = Phaser.Math.Between(600, 900);
     let peach;
     peach = this.peachs
