@@ -2,17 +2,17 @@
     @import url("https://fonts.cdnfonts.com/css/new-super-mario-font-u");
 
     body {
-      padding: 100px;
-      background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url("../assets/background.png");
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-attachment: fixed;
+        padding: 100px;
+        background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url("../assets/background.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-attachment: fixed;
     }
 
     h1 {
-      font-family: "New Super Mario Font U", sans-serif;
-      color: whitesmoke;
+        font-family: "New Super Mario Font U", sans-serif;
+        color: whitesmoke;
     }
 
     .flex {
@@ -89,11 +89,11 @@
         font-family: "New Super Mario Font U", sans-serif;
     }
 
-    .password {
+    .register {
         display: none;
     }
 
-    .password-error {
+    .register-error {
         display: block;
         color: red;
         font-size: 0.80rem;
@@ -104,18 +104,17 @@
 
 <div>
     <form id="signup-form">
-        <h1>Connexion</h1>
+        <h1>Inscription</h1>
         <div class="flex flex-col space-y-3">
-            <input type="email" id="login-email-input" placeholder="Email" required>
-            <input type="password" id="login-password-input" placeholder="Mot de passe" required>
-            <p class="password" id="login-error">Mot de passe incorrect</p>
-            <a href="">Mot de passe oublié ?</a>
+            <input type="email" id="register-email-input" placeholder="Email" required>
+            <input type="password" id="register-password-input" placeholder="Mot de passe" required>
+            <p class="register" id="register-error">register-error</p>
         </div>
-        <button class="flex jcc mia mtb-4" type="submit">Se connecter</button>
+        <button class="flex jcc mia mtb-4" type="submit">S'inscrire</button>
         <hr class="rounded">
     </form>
     <div class="flex flex-col aic">
-        <p>Pas de compte ?</p>
-        <button id="to-register-form">S'inscrire</button>
+        <p>Déjà un compte ?</p>
+        <button id="to-login-scene">Connexion</button>
     </div>
 </div>
