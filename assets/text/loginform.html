@@ -102,18 +102,20 @@
 
 </style>
 
-<form id="signup-form">
-    <h1>Connexion</h1>
-    <div class="flex flex-col space-y-3">
-        <input type="email" id="login-email-input" placeholder="Email" required>
-        <input type="password" id="login-password-input" placeholder="Mot de passe" required>
-        <p class="password">Mot de passe incorrect</p>
-        <a href="">Mot de passe oublié ?</a>
-    </div>
-    <button class="flex jcc mia mtb-4" type="submit">Se connecter</button>
-    <hr class="rounded">
+<div>
+    <form id="signup-form">
+        <h1>Connexion</h1>
+        <div class="flex flex-col space-y-3">
+            <input type="email" id="login-email-input" placeholder="Email" required>
+            <input type="password" id="login-password-input" placeholder="Mot de passe" required>
+            <p class="password" id="login-error">Mot de passe incorrect</p>
+            <a href="">Mot de passe oublié ?</a>
+        </div>
+        <button class="flex jcc mia mtb-4" type="submit">Se connecter</button>
+        <hr class="rounded">
+    </form>
     <div class="flex flex-col aic">
         <p>Pas de compte ?</p>
-        <button type="submit">S'inscrire</button>
+        <button id="to-register-form">S'inscrire</button>
     </div>
-</form>
+</div>

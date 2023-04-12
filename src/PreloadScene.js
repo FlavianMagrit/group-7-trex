@@ -57,7 +57,7 @@ class PreloadScene extends Phaser.Scene {
   }
 
   create() {
-      this.scene.start('RegisterForm');
+      this.scene.start('LoginForm');
   }
 }
 

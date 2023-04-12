@@ -8,7 +8,7 @@ import LoginForm from "./LoginForm";
 const config = {
   type: Phaser.AUTO,
   width: 1000,
-  height: 400,
+  height: 460,
   parent: "game-container",
   pixelArt: true,
   transparent: true,

@@ -15,6 +15,11 @@ class RegisterForm extends Phaser.Scene {
         const registerForm = this.add.dom(this.cameras.main.width / 2, this.cameras.main.height / 2)
             .createFromCache(`register-form`);
 
+        const loginButton = document.getElementById("to-login-scene");
+        loginButton.addEventListener("click", () => {
+            this.scene.start('LoginForm')}
+        );
+
         registerForm.addListener('submit');
         registerForm.on('submit', (event) => {
             event.preventDefault();
@@ -28,20 +33,20 @@ class RegisterForm extends Phaser.Scene {
                     console.log('Inscription réussie !', userCredential);
                     this.scene.start('PlayScene');
                 })
-                .catch((erreur) => {
+                .catch((err) => {
                     const passwordError = document.querySelector('.register');
                     passwordError.classList.toggle('register-error');
 
-                    if (erreur.code === 'auth/email-already-in-use') {
+                    if (err.code === 'auth/email-already-in-use') {
                         console.log('Erreur : Le compte existe déjà.');
                         error.innerHTML = "Le compte existe déjà.";
 
-                    } else if (erreur.code === 'auth/weak-password') {
+                    } else if (err.code === 'auth/weak-password') {
                         console.log('Erreur : Le mot de passe est trop faible.');
                         error.innerHTML = "Le mot de passe est trop faible.";
                     }
                     else {
-                        console.log('Erreur d\'inscription :', erreur);
+                        console.log('Erreur d\'inscription :', err);
                         error.innerHTML = "Erreur d\'inscription.";
                     }
                 });
