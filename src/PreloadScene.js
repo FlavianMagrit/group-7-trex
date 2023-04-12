@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import LoginForm from "./LoginForm";
+import Menu from "./Menu";
 
 class PreloadScene extends Phaser.Scene {
   constructor() {
@@ -53,10 +53,12 @@ class PreloadScene extends Phaser.Scene {
     this.load.image("obsticle-6", "assets/enemy_big_3.png");
 
     this.load.html('signup-form', 'assets/text/loginform.html');
+    this.load.html('menu', 'assets/text/menu.html');
+    this.load.html('instructions', 'assets/text/instructions.html');
   }
 
   create() {
-      this.scene.start('LoginForm');
+      this.scene.start('Menu');
   }
 }
 

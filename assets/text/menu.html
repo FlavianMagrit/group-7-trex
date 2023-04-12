@@ -1,0 +1,112 @@
+<style>
+  @import url("https://fonts.cdnfonts.com/css/new-super-mario-font-u");
+
+  body {
+    padding: 100px;
+    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url("../assets/background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+  }
+
+  * {
+    font-family: "New Super Mario Font U", sans-serif;
+  }
+
+  h1 {
+    color: whitesmoke;
+    text-align: center;
+    margin-top: 3rem;
+  }
+
+  .flex {
+    display: flex;
+  }
+
+  .flex-col {
+    flex-direction: column;
+  }
+
+  .space-y {
+    gap: 0.75rem;
+  }
+
+  .space-x {
+    gap: 3rem;
+  }
+
+  .mt {
+    margin: 4rem 3rem 2rem 3rem;
+  }
+
+  p {
+    color: aliceblue;
+  }
+
+  .howtoplayqm {
+    margin-left: auto;
+    background-color: chocolate;
+    font-size: 1.5rem;
+    border: 2px solid whitesmoke;
+    border-radius: 50%;
+    padding: 0 .9rem 0 .9rem;
+    color: whitesmoke;
+    cursor: pointer;
+  }
+
+  .cj {
+    margin-left: 0.5rem;
+  }
+
+  .butt {
+    width: 100%;
+    height: 100%;
+    background-color: chocolate;
+    border: 0.5rem ridge rgba(56, 26, 5, 0.6);
+  }
+
+  .butt:hover {
+    background-color: rgb(156, 77, 20);
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+    transition-duration: 500ms;
+    cursor: pointer;
+  }
+
+  .buttP {
+    padding: 0 1rem 0 1rem;
+    font-size: 1rem;
+  }
+
+  a {
+    color: aliceblue;
+  }
+
+  .main {
+    padding: 1.5rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+  }
+</style>
+
+<div class="main">
+  <div class="flex flex-row">
+    <button id="howtoplayqm" class="howtoplayqm">?</button>
+    <p id="htp" class="cj">Comment jouer ?</p>
+  </div>
+
+  <h1>Menu principal</h1>
+  <div class="flex flex-row space-x space-y mt">
+    <button id="login" class="butt">
+      <p class="buttP">Connexion</p>
+    </button>
+    <button id="play" class="butt">
+      <p class="buttP">Jouer</p>
+    </button>
+    <button id="leaderboard" class="butt">
+      <p class="buttP">Classement</p>
+    </button>
+  </div>
+</div>

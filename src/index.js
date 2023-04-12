@@ -2,6 +2,8 @@ import Phaser from 'phaser';
 
 import PlayScene from './PlayScene';
 import LoginForm from './LoginForm';
+import Menu from './Menu';
+import Instructions from './Instructions';
 import PreloadScene from './PreloadScene';
 
 const config = {
@@ -17,7 +19,7 @@ const config = {
       debug: false
     }
   },
-  scene: [PreloadScene, LoginForm, PlayScene],
+  scene: [PreloadScene, LoginForm, Menu, Instructions, PlayScene],
   dom: {
     createContainer: true,
   },
