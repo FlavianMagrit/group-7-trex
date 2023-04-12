@@ -2,9 +2,7 @@ import Phaser from 'phaser';
 import firebase from "firebase/compat/app"
 import "firebase/compat/auth"
 import "firebase/compat/firestore"
-import { firebaseConfig } from './firebaseConfig.js';
 
-firebase.initializeApp(firebaseConfig);
 
 class RegisterForm extends Phaser.Scene {
     constructor() {
@@ -18,6 +16,11 @@ class RegisterForm extends Phaser.Scene {
         const registerButton = document.getElementById("to-register-form");
         registerButton.addEventListener("click", () => {
             this.scene.start('RegisterForm')}
+        );
+
+        const backButton = document.getElementById("back-menu");
+        backButton.addEventListener("click", () => {
+            this.scene.start('Menu')}
         );
 
         loginForm.addListener('submit');
