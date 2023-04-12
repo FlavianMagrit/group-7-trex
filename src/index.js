@@ -1,4 +1,6 @@
 import Phaser from "phaser";
+import firebase from "firebase/compat/app"
+import { getFirestore } from "firebase/firestore";
 
 import PlayScene from "./PlayScene";
 import RegisterForm from "./RegisterForm.js";
@@ -10,6 +12,8 @@ import Leaderboard from "./Leaderboard";
 import {firebaseConfig} from "./firebaseConfig";
 
 firebase.initializeApp(firebaseConfig);
+
+export const db = getFirestore(firebase.initializeApp(firebaseConfig));
 
 const config = {
   type: Phaser.AUTO,
