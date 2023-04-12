@@ -438,7 +438,7 @@ class PlayScene extends Phaser.Scene {
           this.game.config.height - 50,
           `tuyau`
         )
-        .setOrigin(0, 2);
+        .setOrigin(0, 1.8);
 
         obsticle.setImmovable();
 
@@ -448,7 +448,7 @@ class PlayScene extends Phaser.Scene {
           this.game.config.height - 50,
           `tuyau_v2`
         )
-        .setOrigin(0, 5);
+        .setOrigin(0, 6.3);
 
         obsticle.setImmovable();
 
@@ -458,7 +458,17 @@ class PlayScene extends Phaser.Scene {
           this.game.config.height - 50,
           `tuyau_v2`
         )
-        .setOrigin(0, 6);
+        .setOrigin(0, 7);
+
+        obsticle.setImmovable();
+
+        obsticle = this.obsticles
+        .create(
+          this.game.config.width + distance,
+          this.game.config.height - 50,
+          `tuyau_v2`
+        )
+        .setOrigin(0, 8);
 
         obsticle.setImmovable();
     } else {
