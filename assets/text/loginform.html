@@ -100,11 +100,26 @@
         font-family: "New Super Mario Font U", sans-serif;
     }
 
+    .main {
+        padding: 2rem;
+        background-color: rgba(0, 0, 0, 0.5);
+        border-radius: 15px;
+    }
+
+    .back-button {
+        height: fit-content;
+        width: fit-content;
+        margin-right: 1rem;
+    }
+
 </style>
 
-<div>
+<div class="main">
+    <button id="back-menu" class="back-button">←</button>
     <form id="signup-form">
-        <h1>Connexion</h1>
+        <div class="flex jcc">
+            <h1>Connexion</h1>
+        </div>
         <div class="flex flex-col space-y-3">
             <input type="email" id="login-email-input" placeholder="Email" required>
             <input type="password" id="login-password-input" placeholder="Mot de passe" required>

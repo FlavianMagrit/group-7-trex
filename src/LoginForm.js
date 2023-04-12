@@ -1,10 +1,8 @@
-import Phaser from "phaser";
-import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
-import "firebase/compat/firestore";
-import { firebaseConfig } from "./firebaseConfig.js";
+import Phaser from 'phaser';
+import firebase from "firebase/compat/app"
+import "firebase/compat/auth"
+import "firebase/compat/firestore"
 
-firebase.initializeApp(firebaseConfig);
 
 class RegisterForm extends Phaser.Scene {
   constructor() {
@@ -21,9 +19,14 @@ class RegisterForm extends Phaser.Scene {
       this.scene.start("RegisterForm");
     });
 
-    loginForm.addListener("submit");
-    loginForm.on("submit", (event) => {
-      event.preventDefault();
+        const backButton = document.getElementById("back-menu");
+        backButton.addEventListener("click", () => {
+            this.scene.start('Menu')}
+        );
+
+        loginForm.addListener('submit');
+        loginForm.on('submit', (event) => {
+            event.preventDefault();
 
       const email = document.getElementById("login-email-input").value;
       const password = document.getElementById("login-password-input").value;
