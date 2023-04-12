@@ -438,6 +438,28 @@ class PlayScene extends Phaser.Scene {
           `tuyau`
         )
         .setOrigin(0, 2);
+
+        obsticle.setImmovable();
+
+        obsticle = this.obsticles
+        .create(
+          this.game.config.width + distance,
+          this.game.config.height - 50,
+          `tuyau_v2`
+        )
+        .setOrigin(0, 5);
+
+        obsticle.setImmovable();
+
+        obsticle = this.obsticles
+        .create(
+          this.game.config.width + distance,
+          this.game.config.height - 50,
+          `tuyau_v2`
+        )
+        .setOrigin(0, 6);
+
+        obsticle.setImmovable();
     } else {
       obsticle = this.obsticles
         .create(

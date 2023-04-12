@@ -65,6 +65,7 @@ class PreloadScene extends Phaser.Scene {
     this.load.html("leaderboard", "assets/text/leaderboard.html");
 
     this.load.image("tuyau", "assets/tuyau.png");
+    this.load.image("tuyau_v2", "assets/tuyau_v2.png");
 
     this.load.image("peach", "assets/peach.png");
     this.load.html("register-form", "assets/text/registerform.html");
