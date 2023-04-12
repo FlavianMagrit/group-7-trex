@@ -11,6 +11,7 @@ class PlayScene extends Phaser.Scene {
     this.gameSpeed = 10;
     this.isGameRunning = false;
     this.respawnTime = 0;
+    this.peachRespawnTime = 0;
     this.score = 0;
     this.bonusRespawnTime = 0;
     this.lives = 0;
@@ -389,7 +390,7 @@ class PlayScene extends Phaser.Scene {
 
     peach.body.offset.y = +10;
 
-    peachs.setImmovable();
+    peach.setImmovable();
   }
 
   update(time, delta) {
@@ -399,18 +400,28 @@ class PlayScene extends Phaser.Scene {
 
     this.ground.tilePositionX += this.gameSpeed;
     Phaser.Actions.IncX(this.obsticles.getChildren(), -this.gameSpeed);
+    Phaser.Actions.IncX(this.peachs.getChildren(), -this.gameSpeed);
     Phaser.Actions.IncX(this.environment.getChildren(), -0.5);
 
     this.respawnTime += delta * this.gameSpeed * 0.08;
+    this.peachRespawnTime += delta * this.gameSpeed * 0.08;
     if (this.respawnTime >= 1500) {
       this.placeObsticle();
-      this.placePeach(this.mario, this.lives);
       this.respawnTime = 0;
+    }
+    if (this.peachRespawnTime >= 13000) {
+      this.placePeach();
+      this.peachRespawnTime = 0;
     }
 
     this.obsticles.getChildren().forEach((obsticle) => {
       if (obsticle.getBounds().right < 0) {
         this.obsticles.killAndHide(obsticle);
+      }
+    });
+    this.peachs.getChildren().forEach((peach) => {
+      if (peach.getBounds().right < 0) {
+        this.peachs.killAndHide(peach);
       }
     });
 
