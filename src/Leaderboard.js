@@ -9,16 +9,17 @@ class Leaderboard extends Phaser.Scene {
   }
 
   create() {
-    // db.collection("scores")
-    //     .orderBy("score", "desc")
-    //     .limit(10)
-    //     .get()
-
-    // console.log('db', db.collection("scores"));
+    this.add
+        .dom(this.cameras.main.width / 2, this.cameras.main.height / 2)
+        .createFromCache(`leaderboard`);
 
     const collectionRef = firebase.firestore().collection("scores");
+    const backButton = document.getElementById("back-menu");
 
-    // Récupérer les données de la collection
+    backButton.addEventListener("click", () => {
+      this.scene.start('Menu')}
+    );
+
     collectionRef
       .get()
       .then((querySnapshot) => {
@@ -39,10 +40,6 @@ class Leaderboard extends Phaser.Scene {
       .catch((error) => {
         console.error("Erreur lors de la récupération des données:", error);
       });
-
-    this.add
-      .dom(this.cameras.main.width / 2, this.cameras.main.height / 2)
-      .createFromCache(`leaderboard`);
   }
 }
 
