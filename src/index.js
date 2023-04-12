@@ -17,7 +17,7 @@ export const db = getFirestore(firebase.initializeApp(firebaseConfig));
 
 const config = {
   type: Phaser.AUTO,
-  width: screen.width - 200,
+  width: screen.width,
   height: 600,
   parent: "game-container",
   pixelArt: true,
