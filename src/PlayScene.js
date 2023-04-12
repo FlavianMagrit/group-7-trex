@@ -392,7 +392,7 @@ class PlayScene extends Phaser.Scene {
       this.game.config.height - Phaser.Math.Between(100, 300),
       "bonus"
     );
-    bonus.setOrigin(0, 1);
+    bonus.setOrigin(0, 1.2);
     bonus.setImmovable();
   }
 
@@ -405,7 +405,7 @@ class PlayScene extends Phaser.Scene {
         this.game.config.height,
         `peach`
       )
-      .setOrigin(0, 1);
+      .setOrigin(0, 1.2);
 
     peach.body.offset.y = +10;
 
