@@ -224,16 +224,6 @@ class PlayScene extends Phaser.Scene {
     });
 
     this.anims.create({
-      key: "mario-down-anim",
-      frames: this.anims.generateFrameNumbers("mario-down", {
-        start: 0,
-        end: 1,
-      }),
-      frameRate: 10,
-      repeat: -1,
-    });
-
-    this.anims.create({
       key: "enemy-mario-fly",
       frames: this.anims.generateFrameNumbers("enemy-bill", {
         start: 0,
@@ -319,15 +309,6 @@ class PlayScene extends Phaser.Scene {
       this.mario.setTexture("mario-jump", 0);
     });
 
-    this.input.keyboard.on("keydown_DOWN", () => {
-      if (!this.mario.body.onFloor() || !this.isGameRunning) {
-        return;
-      }
-
-      this.mario.body.height = 58;
-      this.mario.body.offset.y = 34;
-    });
-
     this.input.keyboard.on("keyup_DOWN", () => {
       if (this.score !== 0 && !this.isGameRunning) {
         return;
@@ -344,14 +325,14 @@ class PlayScene extends Phaser.Scene {
     console.log(obsticleNum);
     let obsticle;
     if (obsticleNum == 7) {
-      const enemyHeight = [20, 50];
+      const enemyHeight = [-10, 70,140];
       obsticle = this.obsticles
-        .create(
-          this.game.config.width + distance,
-          this.game.config.height - enemyHeight[Math.floor(Math.random() * 2)],
-          `enemy-bill`
-        )
-        .setOrigin(0, 1);
+          .create(
+              this.game.config.width + distance,
+              this.game.config.height - enemyHeight[Math.floor(Math.random() * 3)],
+              `enemy-bill`
+          )
+          .setOrigin(0, 1);
       obsticle.play("enemy-mario-fly", 1);
       obsticle.body.height = obsticle.body.height / 1.5;
     } else if (obsticleNum == 8) {
