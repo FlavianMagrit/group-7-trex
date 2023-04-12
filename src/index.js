@@ -1,16 +1,19 @@
-import Phaser from 'phaser';
+import Phaser from "phaser";
+import firebase from "firebase/compat/app"
+import { getFirestore } from "firebase/firestore";
 
-import PlayScene from './PlayScene';
-import RegisterForm from './RegisterForm.js';
-import PreloadScene from './PreloadScene';
-import LoginForm from './LoginForm';
-import Menu from './Menu';
-import Instructions from './Instructions';
-import firebase from "firebase/compat/app";
+import PlayScene from "./PlayScene";
+import RegisterForm from "./RegisterForm.js";
+import PreloadScene from "./PreloadScene";
+import LoginForm from "./LoginForm";
+import Menu from "./Menu";
+import Instructions from "./Instructions";
+import Leaderboard from "./Leaderboard";
 import {firebaseConfig} from "./firebaseConfig";
 
-
 firebase.initializeApp(firebaseConfig);
+
+export const db = getFirestore(firebase.initializeApp(firebaseConfig));
 
 const config = {
   type: Phaser.AUTO,
@@ -25,7 +28,15 @@ const config = {
       debug: false,
     },
   },
-  scene: [PreloadScene, LoginForm, RegisterForm, Menu, Instructions, PlayScene],
+  scene: [
+    PreloadScene,
+    LoginForm,
+    RegisterForm,
+    Menu,
+    Instructions,
+    PlayScene,
+    Leaderboard,
+  ],
   dom: {
     createContainer: true,
   },
