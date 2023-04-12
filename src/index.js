@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import firebase from "firebase/compat/app"
+import firebase from "firebase/compat/app";
 import { getFirestore } from "firebase/firestore";
 
 import PlayScene from "./PlayScene";
@@ -8,15 +8,7 @@ import PreloadScene from "./PreloadScene";
 import LoginForm from "./LoginForm";
 import Menu from "./Menu";
 import Instructions from "./Instructions";
-import firebase from "firebase/compat/app";
 import { firebaseConfig } from "./firebaseConfig";
-
-import PlayScene from "./PlayScene";
-import RegisterForm from "./RegisterForm.js";
-import PreloadScene from "./PreloadScene";
-import LoginForm from "./LoginForm";
-import Menu from "./Menu";
-import Instructions from "./Instructions";
 import Leaderboard from "./Leaderboard";
 
 firebase.initializeApp(firebaseConfig);
