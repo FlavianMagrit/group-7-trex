@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterForm.js";
 
 class PreloadScene extends Phaser.Scene {
   constructor() {
@@ -52,7 +52,8 @@ class PreloadScene extends Phaser.Scene {
     this.load.image("obsticle-5", "assets/enemy_big_2.png");
     this.load.image("obsticle-6", "assets/enemy_big_3.png");
 
-    this.load.html('signup-form', 'assets/text/loginform.html');
+    this.load.html('register-form', 'assets/text/registerform.html');
+    this.load.html('login-form', 'assets/text/loginform.html');
   }
 
   create() {

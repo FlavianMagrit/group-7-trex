@@ -1,13 +1,14 @@
 import Phaser from 'phaser';
 
 import PlayScene from './PlayScene';
-import LoginForm from './LoginForm';
+import RegisterForm from './RegisterForm.js';
 import PreloadScene from './PreloadScene';
+import LoginForm from "./LoginForm";
 
 const config = {
   type: Phaser.AUTO,
   width: 1000,
-  height: 340,
+  height: 400,
   parent: "game-container",
   pixelArt: true,
   transparent: true,
@@ -17,7 +18,7 @@ const config = {
       debug: false
     }
   },
-  scene: [PreloadScene, LoginForm, PlayScene],
+  scene: [PreloadScene, PlayScene, RegisterForm, LoginForm],
   dom: {
     createContainer: true,
   },
