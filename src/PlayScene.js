@@ -316,7 +316,7 @@ class PlayScene extends Phaser.Scene {
           .create(
               this.game.config.width + distance,
               this.game.config.height - enemyHeight[Math.floor(Math.random() * 2)],
-              `enemy`
+              `enemy-bill`
           )
           .setOrigin(0, 1);
       obsticle.play("enemy-mario-fly", 1);
