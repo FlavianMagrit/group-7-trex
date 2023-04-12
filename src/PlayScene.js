@@ -73,7 +73,7 @@ class PlayScene extends Phaser.Scene {
       .setGravityY(5000)
       .setBodySize(44, 92)
       .setDepth(1)
-      .setOrigin(0, 1.2);
+      .setOrigin(0, 1);
 
     this.scoreText = this.add
       .text(width, 0, "00000", {
@@ -360,7 +360,7 @@ class PlayScene extends Phaser.Scene {
               this.game.config.height - enemyHeight[Math.floor(Math.random() * 3)],
               `enemy-bill`
           )
-          .setOrigin(0, 1);
+          .setOrigin(0, 1.2);
       obsticle.play("enemy-mario-fly", 1);
       obsticle.body.height = obsticle.body.height / 1.5;
     } else if (obsticleNum == 8) {
