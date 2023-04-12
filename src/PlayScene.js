@@ -80,7 +80,7 @@ class PlayScene extends Phaser.Scene {
       .setOrigin(0, 1)
       .setImmovable();
     this.ground = this.add
-      .tileSprite(0, height, 88, 50, "ground")
+      .tileSprite(0, height, 88, 0)
       .setOrigin(0, 0.5);
     this.mario = this.physics.add
       .sprite(0, height, "mario-idle")
@@ -428,7 +428,7 @@ class PlayScene extends Phaser.Scene {
               this.game.config.height - enemyHeight[Math.floor(Math.random() * 3)],
               `enemy-bill`
           )
-          .setOrigin(0, 1.2);
+          .setOrigin(0, 1);
       obsticle.play("enemy-mario-fly", 1);
       obsticle.body.height = obsticle.body.height / 1.5;
     } else if (obsticleNum == 8) {
@@ -468,7 +468,7 @@ class PlayScene extends Phaser.Scene {
           this.game.config.height,
           `obsticle-${obsticleNum}`
         )
-        .setOrigin(0, 1.2);
+        .setOrigin(0, 1);
 
       obsticle.body.offset.y = +10;
     }
@@ -482,7 +482,7 @@ class PlayScene extends Phaser.Scene {
       this.game.config.height - Phaser.Math.Between(100, 300),
       "bonus"
     );
-    bonus.setOrigin(0, 1.2);
+    bonus.setOrigin(0, 1);
     bonus.setImmovable();
   }
 
