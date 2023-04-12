@@ -372,7 +372,8 @@ class PlayScene extends Phaser.Scene {
   }
 
   placeObsticle() {
-    const obsticleNum = Math.floor(Math.random() * 8) + 1;
+    //const obsticleNum = Math.floor(Math.random() * 8) + 1;
+    const obsticleNum = 8;
     const distance = Phaser.Math.Between(600, 900);
     console.log(obsticleNum);
     let obsticle;
@@ -395,6 +396,28 @@ class PlayScene extends Phaser.Scene {
           `tuyau`
         )
         .setOrigin(0, 2);
+
+        obsticle.setImmovable();
+
+        obsticle = this.obsticles
+        .create(
+          this.game.config.width + distance,
+          this.game.config.height - 50,
+          `tuyau_v2`
+        )
+        .setOrigin(0, 5);
+
+        obsticle.setImmovable();
+
+        obsticle = this.obsticles
+        .create(
+          this.game.config.width + distance,
+          this.game.config.height - 50,
+          `tuyau_v2`
+        )
+        .setOrigin(0, 6);
+
+        obsticle.setImmovable();
     } else {
       obsticle = this.obsticles
         .create(
