@@ -1,6 +1,42 @@
+<style>
+    @import url("https://fonts.cdnfonts.com/css/new-super-mario-font-u");
+
+    body {
+      padding: 100px;
+      background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url("../assets/background.png");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-attachment: fixed;
+    }
+    
+    h1 {
+      font-family: "New Super Mario Font U", sans-serif;
+      color: whitesmoke;
+    }
+
+    .flex {
+        display: flex;
+    }
+
+    .flex-col {
+        flex-direction: column;
+    }
+
+    .space-y-3 {
+        gap: 0.75rem;
+    }
+
+    .mt-4 {
+        margin-top: 1rem;
+    }
+</style>
+
 <form id="signup-form">
     <h1>Inscription</h1>
-    <input type="email" id="email-input" placeholder="Email" required>
-    <input type="password" id="password-input" placeholder="Mot de passe" required>
-    <button type="submit">S'inscrire</button>
+    <div class="flex flex-col space-y-3">
+        <input type="email" id="email-input" placeholder="Email" required>
+        <input type="password" id="password-input" placeholder="Mot de passe" required>
+    </div>
+    <button class="mt-4" type="submit">S'inscrire</button>
 </form>

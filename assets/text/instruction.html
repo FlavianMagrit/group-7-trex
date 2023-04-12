@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <style>
+    @import url("https://fonts.cdnfonts.com/css/new-super-mario-font-u");
+
+    * {
+      font-family: "New Super Mario Font U", sans-serif;
+      color: whitesmoke;
+    }
+
+    h1 {
+      font-size: 1.875rem;
+      line-height: 2.25rem;
+    }
+
+    p {
+      font-size: 1.25rem;
+      line-height: 0.5rem;
+    }
+
+    .green {
+      color: green;
+    }
+
+    .red {
+      color: red;
+    }
+
+    .orange {
+      color: orange;
+    }
+
+    .blue {
+      color: lightblue;
+    }
+
+    .gray {
+      color: gray;
+    }
+
+    .flex-row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .icns {
+      height: 90px;
+    }
+
+    button {
+      background: none;
+      border: none;
+      padding: 0;
+      font: inherit;
+      cursor: pointer;
+      outline: inherit;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 90px;
+      height: 90px;
+    }
+
+    .buttonImg {
+      height: 50px;
+    }
+
+    .hwg {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 5rem;
+      gap: 1rem;
+    }
+
+
+    body {
+      padding: 100px;
+      background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url("../assets/background-instruction.png");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-attachment: fixed;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Comment jouer ?</h1>
+
+  <div class="flex-row">
+    <img src="../assets/mario-idle.png" class="icns">
+    <div>
+      <p>Ayant pour mission d'arriver au <span class="blue">drapeau</span></p>
+      <p>Notre hero <span class="red">mario</span> va courir automatiquement vers la droite</p>
+    </div>
+    <img src="../assets/flag.png" class="icns">
+  </div>
+
+  <div class="flex-row">
+    <img src="../assets/mario-down.png" class="icns">
+    <div>
+      <p>Cependant attention, des <span class="orange">ennemies</span> se trouvent sur son chemin !</p>
+      <p>Saute avec la touche <span class="green">ESPACE</span></p>
+      <p>ou accroupis toi avec la touche <span class="green">FLECHE BAS</span></p>
+    </div>
+    <img src="../assets/enemy_small_2.png" class="icns">
+  </div>
+
+  <div class="flex-row">
+    <img src="../assets/mario-hurt.png" class="icns">
+    <div>
+      <p>Si tu te fais attraper par un ennemi, tu perds une vie</p>
+      <p>Et si tu n'as plus de vie, tu recommences <span class="gray">depuis le debut</span></p>
+    </div>
+    <img src="../assets/bonus_life.png" class="icns">
+  </div>
+
+  <div class="hwg">
+    <p>Here we go !</p>
+    <a href="./">
+      <img src="../assets/restart.png" class="buttonImg">
+    </a>
+  </div>
+
+</body>
+
+</html>
