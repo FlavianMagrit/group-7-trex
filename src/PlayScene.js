@@ -16,7 +16,7 @@ class PlayScene extends Phaser.Scene {
     this.reachSound = this.sound.add("reach", { volume: 0.2 });
 
     this.startTrigger = this.physics.add
-        .sprite(0, 10)
+        .sprite(0, 100)
         .setOrigin(0, 1)
         .setImmovable();
     this.ground = this.add

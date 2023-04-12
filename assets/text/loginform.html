@@ -88,6 +88,18 @@
         font-size: 0.80rem;
         font-family: "New Super Mario Font U", sans-serif;
     }
+
+    .password {
+        display: none;
+    }
+
+    .password-error {
+        display: block;
+        color: red;
+        font-size: 0.80rem;
+        font-family: "New Super Mario Font U", sans-serif;
+    }
+
 </style>
 
 <form id="signup-form">
@@ -95,6 +107,7 @@
     <div class="flex flex-col space-y-3">
         <input type="email" id="login-email-input" placeholder="Email" required>
         <input type="password" id="login-password-input" placeholder="Mot de passe" required>
+        <p class="password">Mot de passe incorrect</p>
         <a href="">Mot de passe oublié ?</a>
     </div>
     <button class="flex jcc mia mtb-4" type="submit">Se connecter</button>

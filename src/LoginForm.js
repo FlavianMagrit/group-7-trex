@@ -24,12 +24,16 @@ class RegisterForm extends Phaser.Scene {
 
             firebase.auth().signInWithEmailAndPassword(email, password)
                 .then((userCredential) => {
-                    // L'utilisateur s'est connecté avec succès
+
                     console.log('Utilisateur connecté avec succès :', userCredential.user);
+                    this.scene.start('PlayScene');
                 })
                 .catch((error) => {
-                    // Gérer les erreurs de connexion
+
+                    const passwordError = document.querySelector('.password');
+                    passwordError.classList.toggle('password-error');
                     console.error('Erreur de connexion :', error);
+
                 });
         });
     }

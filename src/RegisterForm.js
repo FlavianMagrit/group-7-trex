@@ -21,13 +21,29 @@ class RegisterForm extends Phaser.Scene {
 
             const email = document.getElementById('register-email-input').value;
             const password = document.getElementById('register-password-input').value;
+            const error = document.getElementById("register-error");
 
             firebase.auth().createUserWithEmailAndPassword(email, password)
                 .then((userCredential) => {
                     console.log('Inscription réussie !', userCredential);
+                    this.scene.start('PlayScene');
                 })
-                .catch((error) => {
-                    console.log('Erreur d\'inscription :', error.message);
+                .catch((erreur) => {
+                    const passwordError = document.querySelector('.register');
+                    passwordError.classList.toggle('register-error');
+
+                    if (erreur.code === 'auth/email-already-in-use') {
+                        console.log('Erreur : Le compte existe déjà.');
+                        error.innerHTML = "Le compte existe déjà.";
+
+                    } else if (erreur.code === 'auth/weak-password') {
+                        console.log('Erreur : Le mot de passe est trop faible.');
+                        error.innerHTML = "Le mot de passe est trop faible.";
+                    }
+                    else {
+                        console.log('Erreur d\'inscription :', erreur);
+                        error.innerHTML = "Erreur d\'inscription.";
+                    }
                 });
         });
     }
