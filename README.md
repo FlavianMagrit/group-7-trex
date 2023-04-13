@@ -55,17 +55,22 @@ Vous devez disposer d'un navigateur web moderne (Chrome, Firefox, Safari ou Edge
 ## Captures d'écran
 
 
-#Page d'accueil
+#Page d'accueil. 
+
 <img width="648" alt="Capture d’écran 2023-04-13 à 11 53 24" src="https://user-images.githubusercontent.com/48103249/231723619-9d499561-e5dc-4e39-8f1f-34c67e698e7e.png">
 
-#Page d'information
+#Page d'information. 
+
 <img width="925" alt="Capture d’écran 2023-04-13 à 11 53 30" src="https://user-images.githubusercontent.com/48103249/231723608-17a0eedf-c5a4-4f1c-af55-e34f7c6e1905.png">
 
-#Page de connexion
+#Page de connexion. 
+
 <img width="337" alt="Capture d’écran 2023-04-13 à 11 54 41" src="https://user-images.githubusercontent.com/48103249/231724123-fea13519-27b1-45e4-913a-5677839324ee.png">
 
-#Page de jeu
+#Page de jeu. 
+
 <img width="1628" alt="Capture d’écran 2023-04-13 à 11 54 51" src="https://user-images.githubusercontent.com/48103249/231724163-5c8e9483-c81e-4ba8-a89a-9371be8a1d79.png">
 
-#Game Over
+#Game Over. 
+
 <img width="1675" alt="Capture d’écran 2023-04-13 à 11 55 01" src="https://user-images.githubusercontent.com/48103249/231724185-4d4a126a-8134-4833-94ed-dedf5d164941.png">
